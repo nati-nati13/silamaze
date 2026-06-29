@@ -1,0 +1,68 @@
+import { Facebook, MapPin } from 'lucide-react';
+import Link from 'next/link';
+
+import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
+import { FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
+
+export const ContactPage = () => {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">
+        <section className="bg-muted py-20">
+          <div className="mx-auto max-w-7xl px-6 sm:px-10 text-center">
+            <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              დაგვიკავშირდი
+            </p>
+            <h1 className="mt-3 font-heading text-5xl font-bold text-foreground sm:text-6xl">
+              კონტაქტი
+            </h1>
+          </div>
+        </section>
+
+        <section className="py-24 bg-background">
+          <div className="mx-auto max-w-7xl px-6 sm:px-10">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-3xl mx-auto">
+              {LOCATIONS.map((loc) => (
+                <div key={loc.city} className="rounded-lg border border-border p-10">
+                  <MapPin className="size-8 text-primary mb-4" aria-hidden="true" />
+                  <h2 className="font-heading text-2xl font-bold text-foreground">
+                    {loc.city}
+                  </h2>
+                  <p className="mt-2 text-base text-muted-foreground">{loc.address}</p>
+                  <div className="mt-6">
+                    <Link
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.mapQuery)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold text-primary transition-colors hover:text-primary/80"
+                    >
+                      რუქაზე ნახვა →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-16 text-center">
+              <p className="text-xs font-semibold tracking-widest uppercase text-secondary mb-6">
+                სოციალური ქსელები
+              </p>
+              <Link
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-lg border border-border px-8 py-4 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+              >
+                <Facebook className="size-5" aria-hidden="true" />
+                Dermako Academy — Facebook
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
