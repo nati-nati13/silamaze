@@ -44,16 +44,16 @@
 ## ეტაპი 1 — Header dropdown "ჩვენ შესახებ" + სიახლეები + პრესა
 
 **შეიცვლება:**
-- [ ] `src/shared/const/navigation.const.ts` — dropdown სტრუქტურა (`PUBLIC_NAV_ITEMS`-ში dropdown ტიპი)
-- [ ] `src/shared/components/layout/header.tsx` — dropdown UI (hover desktop, accordion mobile)
+- [x] `src/shared/const/navigation.const.ts` — dropdown სტრუქტურა (`PUBLIC_NAV_ITEMS`-ში dropdown ტიპი)
+- [x] `src/shared/components/layout/header.tsx` — dropdown UI (hover desktop, accordion mobile)
 
 **შეიქმნება:**
-- [ ] `src/app/(public)/siaxleebi/page.tsx` → route `/siaxleebi`
-- [ ] `src/features/marketing/components/news-page.tsx` (stub)
-- [ ] `src/shared/const/news.const.ts`
-- [ ] `src/app/(public)/pressa/page.tsx` → route `/pressa`
-- [ ] `src/features/marketing/components/press-page.tsx` (stub)
-- [ ] `src/shared/const/press.const.ts`
+- [x] `src/app/(public)/siaxleebi/page.tsx` → route `/siaxleebi`
+- [x] `src/features/marketing/components/news-page.tsx` (stub)
+- [x] `src/shared/const/news.const.ts`
+- [x] `src/app/(public)/pressa/page.tsx` → route `/pressa`
+- [x] `src/features/marketing/components/press-page.tsx` (stub)
+- [x] `src/shared/const/press.const.ts`
 
 ---
 
