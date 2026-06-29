@@ -2,6 +2,7 @@ import { ContactSection } from '@/features/marketing/components/contact-section'
 import { CoursesSection } from '@/features/marketing/components/courses-section';
 import { HeroSection } from '@/features/marketing/components/hero-section';
 import { ServicesSection } from '@/features/marketing/components/services-section';
+import { StatStrip } from '@/features/marketing/components/stat-strip';
 import { Footer } from '@/shared/components/layout/footer';
 import { Header } from '@/shared/components/layout/header';
 
@@ -11,6 +12,7 @@ export const HomePage = () => {
       <Header />
       <main className="flex-1">
         <HeroSection />
+        <StatStrip />
         <ServicesSection />
         <CoursesSection />
         <ContactSection />

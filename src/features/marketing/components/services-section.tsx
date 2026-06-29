@@ -14,23 +14,43 @@ const ICON_MAP: Record<Service['icon'], LucideIcon> = {
 };
 
 export const ServicesSection = () => {
+  const [featured, ...rest] = SERVICES;
+  const FeaturedIcon = ICON_MAP[featured.icon];
+
   return (
     <section className="py-24 bg-muted">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
-        <header className="mb-16 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
+        <header className="mb-16">
+          <p className="text-xs font-semibold tracking-widest uppercase text-primary">
             ჩვენი სერვისები
           </p>
           <h2 className="mt-3 font-heading text-4xl font-bold text-foreground sm:text-5xl">
             სრული მოვლა თქვენთვის
           </h2>
-          <p className="mt-4 text-base text-muted-foreground max-w-xl mx-auto">
+          <div className="mt-4 h-px w-16 bg-primary" aria-hidden="true" />
+          <p className="mt-4 text-base text-muted-foreground max-w-xl">
             პროფესიული კოსმეტოლოგიური სერვისები კვალიფიციური სპეციალისტებისგან
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service) => {
+        <Card className="mb-6 group gap-0 overflow-hidden transition-shadow duration-300 hover:shadow-md">
+          <CardContent className="flex flex-col gap-6 p-8 sm:flex-row sm:items-start">
+            <span className="inline-flex size-14 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+              <FeaturedIcon className="size-6" aria-hidden="true" />
+            </span>
+            <div>
+              <h3 className="font-heading text-2xl font-semibold text-foreground">
+                {featured.title}
+              </h3>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                {featured.description}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {rest.map((service) => {
             const Icon = ICON_MAP[service.icon];
             return (
               <Card
@@ -49,14 +69,13 @@ export const ServicesSection = () => {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {service.description}
                   </p>
-                  <p className="mt-4 text-sm font-semibold text-secondary">ფასი: ––</p>
                 </CardContent>
               </Card>
             );
           })}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-12">
           <Button variant="outline" size="lg" asChild>
             <Link href="/servesebi">ყველა სერვისი</Link>
           </Button>
