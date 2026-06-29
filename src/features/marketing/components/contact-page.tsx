@@ -31,16 +31,6 @@ export const ContactPage = () => {
                     {loc.city}
                   </h2>
                   <p className="mt-2 text-base text-muted-foreground">{loc.address}</p>
-                  <div className="mt-6">
-                    <Link
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.mapQuery)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-semibold text-primary transition-colors hover:text-primary/80"
-                    >
-                      რუქაზე ნახვა →
-                    </Link>
-                  </div>
                   <div className="mt-6 overflow-hidden rounded-lg">
                     <iframe
                       title={`Dermako Academy — ${loc.city}`}

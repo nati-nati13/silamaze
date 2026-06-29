@@ -8,12 +8,12 @@ export const LOCATIONS: Location[] = [
   {
     city: 'თბილისი',
     address: 'ვაჟა-ფშაველას გამზირი 8',
-    mapQuery: 'Vazha-Pshavela 8 Tbilisi Georgia',
+    mapQuery: '41.7270835,44.764282',
   },
   {
     city: 'საგარეჯო',
     address: 'ერეკლე II-ის 49',
-    mapQuery: 'Erekle II 49 Sagarejo Georgia',
+    mapQuery: '41.7386892,45.3249174',
   },
 ];
 
