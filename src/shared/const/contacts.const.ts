@@ -7,7 +7,7 @@ export type Location = {
 export const LOCATIONS: Location[] = [
   {
     city: 'თბილისი',
-    address: 'ვაჟა-ფშაველას 8',
+    address: 'ვაჟა-ფშაველას გამზირი 8',
     mapQuery: 'Vazha-Pshavela 8 Tbilisi Georgia',
   },
   {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@/shared/components/ui/button';
 import { FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
+import { LocationMaps } from './location-maps';
 
 export const ContactSection = () => {
   return (
@@ -28,6 +29,10 @@ export const ContactSection = () => {
               <p className="mt-2 text-sm text-background/70">{loc.address}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10">
+          <LocationMaps />
         </div>
 
         <div className="mt-12 flex flex-col items-center gap-4">

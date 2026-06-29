@@ -129,7 +129,7 @@ export const BookingForm = () => {
                               : 'border-border text-muted-foreground hover:border-primary/40'
                           }`}
                         >
-                          {loc === 'თბილისი' ? 'თბილისი — ვაჟა-ფშაველას 8' : 'საგარეჯო — ერეკლე II-ის 49'}
+                          {loc === 'თბილისი' ? 'თბილისი — ვაჟა-ფშაველას გამზირი 8' : 'საგარეჯო — ერეკლე II-ის 49'}
                         </button>
                       ))}
                     </div>
