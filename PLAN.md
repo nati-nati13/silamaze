@@ -72,12 +72,12 @@
 ## ეტაპი 3 — სასაჩუქრე ბარათი (მთავარ მენიუში ცალკე)
 
 **შეიცვლება:**
-- [ ] `src/shared/const/navigation.const.ts` — "სასაჩუქრე ბარათი" მთავარ nav-ში
+- [x] `src/shared/const/navigation.const.ts` — "სასაჩუქრე ბარათი" მთავარ nav-ში
 
 **შეიქმნება:**
-- [ ] `src/app/(public)/sachuqari-barati/page.tsx` → route `/sachuqari-barati`
-- [ ] `src/features/marketing/components/gift-card-page.tsx`
-- [ ] `src/shared/const/gift-card.const.ts` (ნომინალები, პირობები)
+- [x] `src/app/(public)/sachuqari-barati/page.tsx` → route `/sachuqari-barati`
+- [x] `src/features/marketing/components/gift-card-page.tsx`
+- [x] `src/shared/const/gift-card.const.ts` (ნომინალები, პირობები)
 
 ---
 
