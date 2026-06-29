@@ -3,13 +3,20 @@
 import { useState } from "react";
 
 const BRANCHES = [
-  { city: "თბილისი", address: "ვაჟა-ფშაველას გამზირი 8" },
-  { city: "საგარეჯო", address: "ერეკლე II-ის ქუჩა 49" },
+  {
+    city: "თბილისი",
+    address: "ვაჟა-ფშაველას გამზირი 8",
+    query: "41.7270835,44.764282",
+  },
+  {
+    city: "საგარეჯო",
+    address: "ერეკლე II-ის ქუჩა 49",
+    query: "41.729772,45.331504",
+  },
 ];
 
 export function LocationMaps() {
   const [active, setActive] = useState(0);
-  const query = encodeURIComponent(`${BRANCHES[active].address}, ${BRANCHES[active].city}`);
 
   return (
     <div className="space-y-4">
@@ -32,8 +39,9 @@ export function LocationMaps() {
       </div>
 
       <iframe
+        key={BRANCHES[active].query}
         title={`Dermako Academy — ${BRANCHES[active].city}`}
-        src={`https://maps.google.com/maps?q=${query}&hl=ka&z=16&output=embed`}
+        src={`https://maps.google.com/maps?q=${BRANCHES[active].query}&hl=ka&z=16&output=embed`}
         width="100%"
         height="400"
         style={{ border: 0 }}
