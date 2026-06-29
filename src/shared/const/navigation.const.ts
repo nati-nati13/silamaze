@@ -33,6 +33,7 @@ export const PUBLIC_NAV_ITEMS: PublicNavItem[] = [
     ],
   },
   { type: 'link', href: '/servesebi', label: 'სერვისები' },
+  { type: 'link', href: '/galeria', label: 'გალერეა' },
   { type: 'link', href: '/akademia', label: 'აკადემია' },
   { type: 'link', href: '/kontakti', label: 'კონტაქტი' },
 ];

@@ -60,12 +60,12 @@
 ## ეტაპი 2 — გალერეა (მთავარ მენიუში ცალკე)
 
 **შეიცვლება:**
-- [ ] `src/shared/const/navigation.const.ts` — "გალერეა" მთავარ nav-ში
+- [x] `src/shared/const/navigation.const.ts` — "გალერეა" მთავარ nav-ში
 
 **შეიქმნება:**
-- [ ] `src/app/(public)/galeria/page.tsx` → route `/galeria`
-- [ ] `src/features/marketing/components/gallery-page.tsx`
-- [ ] `src/shared/const/gallery.const.ts` (placeholder ფოტო-ობიექტები: alt, category)
+- [x] `src/app/(public)/galeria/page.tsx` → route `/galeria`
+- [x] `src/features/marketing/components/gallery-page.tsx`
+- [x] `src/shared/const/gallery.const.ts` (placeholder ფოტო-ობიექტები: alt, category)
 
 ---
 
