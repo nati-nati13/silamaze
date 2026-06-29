@@ -26,10 +26,12 @@ export const ContactPage = () => {
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-3xl mx-auto">
               {LOCATIONS.map((loc) => (
                 <div key={loc.city} className="rounded-lg border border-border p-10">
-                  <MapPin className="size-8 text-primary mb-4" aria-hidden="true" />
-                  <h2 className="font-heading text-2xl font-bold text-foreground">
-                    {loc.city}
-                  </h2>
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin className="size-6 text-primary shrink-0" aria-hidden="true" />
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                      {loc.city}
+                    </h2>
+                  </div>
                   <p className="mt-2 text-base text-muted-foreground">{loc.address}</p>
                   <div className="mt-6 overflow-hidden rounded-lg">
                     <iframe
