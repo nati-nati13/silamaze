@@ -41,6 +41,19 @@ export const ContactPage = () => {
                       რუქაზე ნახვა →
                     </Link>
                   </div>
+                  <div className="mt-6 overflow-hidden rounded-lg">
+                    <iframe
+                      title={`Dermako Academy — ${loc.city}`}
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent(loc.mapQuery)}&hl=ka&z=16&output=embed`}
+                      width="100%"
+                      height="220"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="w-full"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
