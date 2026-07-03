@@ -5,6 +5,7 @@ import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { ServicesSection } from '@/features/marketing/components/services-section';
 import { SlideNav } from '@/features/marketing/components/slide-nav';
 import { StatStrip } from '@/features/marketing/components/stat-strip';
+import { Footer } from '@/shared/components/layout/footer';
 
 export const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ export const HomePage = () => {
         <ServicesSection />
         <CoursesSection />
         <ContactSection />
+        <Footer />
       </main>
     </div>
   );
