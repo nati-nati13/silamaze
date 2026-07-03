@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment, useState } from 'react';
@@ -15,12 +16,15 @@ export const LandingHeader = () => {
   return (
     <header className="fixed top-0 z-50 w-full bg-background/20 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10">
-        <Link href="/" className="flex flex-col leading-none">
-          <span className="font-heading text-xl font-bold tracking-widest text-foreground">
-            DERMAKO
-          </span>
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary">
-            ACADEMY
+        <Link href="/" className="flex items-center gap-3">
+          <Image src="/logo.svg" alt="Dermako Academy" width={36} height={36} className="size-9 rounded-full" />
+          <span className="flex flex-col leading-none">
+            <span className="font-heading text-xl font-bold tracking-widest text-foreground">
+              DERMAKO
+            </span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+              ACADEMY
+            </span>
           </span>
         </Link>
 

@@ -1,4 +1,5 @@
 import { Facebook, MapPin } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { APP_NAME } from '@/shared/const/app.const';
@@ -10,12 +11,23 @@ export const Footer = () => {
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-3">
           <div>
-            <p className="font-heading text-2xl font-bold tracking-widest text-background">
-              DERMAKO
-            </p>
-            <p className="mt-1 text-xs font-semibold tracking-widest uppercase text-secondary">
-              ACADEMY
-            </p>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.svg"
+                alt="Dermako Academy"
+                width={40}
+                height={40}
+                className="size-10 rounded-full"
+              />
+              <span className="flex flex-col leading-none">
+                <span className="font-heading text-2xl font-bold tracking-widest text-background">
+                  DERMAKO
+                </span>
+                <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+                  ACADEMY
+                </span>
+              </span>
+            </div>
             <p className="mt-4 text-sm leading-relaxed text-background/60">
               სილამაზე, კოსმეტოლოგია და პროფესიული განათლება.
             </p>
