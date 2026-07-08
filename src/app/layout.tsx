@@ -1,4 +1,4 @@
-import { DM_Sans, Geist_Mono, Playfair_Display } from 'next/font/google';
+import { Fraunces, Geist_Mono, Inter } from 'next/font/google';
 import { type ReactNode } from 'react';
 
 import { APP_DESCRIPTION, APP_NAME } from '@/shared/const/app.const';
@@ -8,14 +8,14 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 
-const playfair = Playfair_Display({
-  variable: '--font-playfair',
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  axes: ['opsz'],
 });
 
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
 });
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="ka"
-      className={`${playfair.variable} ${dmSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

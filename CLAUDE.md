@@ -304,12 +304,19 @@ Ask these exact axes; each meaningfully changes the design:
 
 ```
 STATUS: locked
-Product:    SaaS dashboard / B2B
-Palette:    Monochrome + electric indigo accent
-            base #FAFAFA (light) / #0A0A0A (dark); accent #5B5BFF
-            tokens: --primary oklch(0.555 0.243 271) light / oklch(0.62 0.21 271) dark
-Type:       Geometric sans — Space Grotesk (display, 500/600/700) + Inter (body) + Geist Mono (data)
-Feel:       Balanced — CSS load-rise stagger + hover micro-interactions; reduced-motion respected
-Signature:  Left-aligned typographic hero with one accent word + honest stat strip;
-            dashboard app-shell with mobile drawer sidebar and segmented indigo channel meters
+Product:    Consumer / editorial — DERMAKO ACADEMY, cosmetology academy + beauty clinic (Tbilisi & Sagarejo)
+Palette:    Green + bronze quiet luxury — LIGHT default (NOT a dark site).
+            Deep Green #18312B · Olive Green #6F8F72 · Soft Sage #A8B8A3 · Cream #F7F3EA · Bronze/Gold #B88945 · Dark Text #1E2521
+            Body sections stay LIGHT: Cream (#F7F3EA, --background) + White (#FFFFFF, --card), dark-green text (#1E2521, --foreground).
+            Deep Green (#18312B, --primary) is reserved for HEADER, FOOTER, and occasional CTA bands + primary action buttons — never a full-page dark wash.
+            Bronze/Gold (#B88945, --brand-academy) = eyebrows/labels/accents. Olive (#6F8F72, --brand-green) = hero accent word, icon chips, hover borders.
+            tokens (active light :root in src/app/globals.css): --background oklch(0.965 0.013 86.8); --foreground oklch(0.256 0.013 160.4);
+            --card oklch(1 0 0); --primary oklch(0.291 0.033 176.6); --primary-foreground = cream; --brand-academy oklch(0.662 0.103 74.4); --brand-green oklch(0.617 0.056 147.3).
+            Theme is light-only: ThemeProvider defaultTheme="light", enableSystem=false; the .dark block in globals.css is currently unused — do NOT wrap pages in `dark`.
+Type:       Editorial serif display + sans body — Fraunces (headings, --font-fraunces) + Inter (body, --font-inter) + Geist Mono (data, --font-geist-mono)
+Feel:       Minimal & calm — quiet luxury / clean editorial minimalism (ref: Aesop, Vogue Beauty). Premium beauty academy, NOT heavy dark UI.
+            CSS load-rise stagger + subtle hover lift; reduced-motion respected. Normal scroll (NO snap-slides / dot-nav).
+Signature:  Left-aligned editorial hero with one italic accent word (text-brand-green) + hand-drawn SVG underline;
+            bronze uppercase eyebrow labels; centered section heads; card grids with hover lift and growing top-rule;
+            embedded location maps; green CTA band; 4-column footer.
 ```

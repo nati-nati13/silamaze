@@ -14,15 +14,21 @@ export const LandingHeader = () => {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-background/20 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b border-primary-foreground/10 bg-primary">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.svg" alt="Dermako Academy" width={36} height={36} className="size-9 rounded-full" />
-          <span className="flex flex-col leading-none">
-            <span className="font-heading text-xl font-bold tracking-widest text-foreground">
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image
+            src="/logo.svg"
+            alt="Dermako Academy"
+            width={40}
+            height={40}
+            className="size-10 rounded-full"
+          />
+          <span className="flex flex-col leading-none gap-1">
+            <span className="font-heading text-xl font-bold tracking-widest text-primary-foreground">
               DERMAKO
             </span>
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary">
+            <span className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
               ACADEMY
             </span>
           </span>
@@ -39,8 +45,8 @@ export const LandingHeader = () => {
                       href={child.href}
                       className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 ${
                         pathname === child.href
-                          ? 'text-primary'
-                          : 'text-foreground/60 hover:text-primary'
+                          ? 'text-brand-academy'
+                          : 'text-primary-foreground/70 hover:text-primary-foreground'
                       }`}
                     >
                       {child.label}
@@ -66,20 +72,29 @@ export const LandingHeader = () => {
           })}
         </nav>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          className="md:hidden text-foreground/70 hover:text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="მენიუ"
-        >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button
+            asChild
+            size="sm"
+            className="hidden bg-primary-foreground font-semibold text-primary hover:bg-primary-foreground/90 md:inline-flex"
+          >
+            <Link href="/kontakti">დაჯავშნა</Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden text-primary-foreground/80 hover:text-primary-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="მენიუ"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </Button>
+        </div>
       </div>
 
       {mobileOpen && (
         <nav
-          className="md:hidden border-t border-border/30 bg-background/90 backdrop-blur-md px-6 py-4"
+          className="md:hidden border-t border-primary-foreground/10 bg-primary px-6 py-4"
           aria-label="მობილური ნავიგაცია"
         >
           <ul className="flex flex-col gap-4">
@@ -93,8 +108,8 @@ export const LandingHeader = () => {
                           href={child.href}
                           className={`block text-sm font-semibold tracking-widest uppercase transition-colors ${
                             pathname === child.href
-                              ? 'text-primary'
-                              : 'text-foreground/60 hover:text-primary'
+                              ? 'text-brand-academy'
+                              : 'text-primary-foreground/70 hover:text-primary-foreground'
                           }`}
                           onClick={() => setMobileOpen(false)}
                         >

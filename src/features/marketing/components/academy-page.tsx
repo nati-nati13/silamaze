@@ -1,4 +1,4 @@
-import { CheckCircle, Pencil, Sparkles, Zap, type LucideIcon } from 'lucide-react';
+import { CheckCircle, Hand, Pencil, Sparkles, Syringe, Zap, type LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import { EnrollButton } from '@/features/enrollment/components/enroll-button';
@@ -13,6 +13,8 @@ const ICON_MAP: Record<Course['icon'], LucideIcon> = {
   sparkles: Sparkles,
   zap: Zap,
   pencil: Pencil,
+  syringe: Syringe,
+  hand: Hand,
 };
 
 const WHY_US = [

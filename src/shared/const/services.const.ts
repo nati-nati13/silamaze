@@ -2,7 +2,7 @@ export type Service = {
   id: string;
   title: string;
   description: string;
-  icon: 'sparkles' | 'droplets' | 'hand' | 'pencil' | 'zap';
+  icon: 'sparkles' | 'syringe' | 'hand' | 'pencil' | 'zap';
 };
 
 export const SERVICES: Service[] = [
@@ -18,20 +18,20 @@ export const SERVICES: Service[] = [
     title: 'ინექციური კოსმეტოლოგია',
     description:
       'ბოტულოტოქსინი, ჰიალურონის მჟავა და სხვა ინექციური პროცედურები კვალიფიციური სპეციალისტებისგან.',
-    icon: 'droplets',
+    icon: 'syringe',
   },
   {
     id: 'massage',
     title: 'მასაჟი',
     description:
-      'სახის და სხეულის მასაჟი — მოდუნება, ტონუსის აღდგენა და კანის გამოჯანმრთელება. პროფესიული ტექნიკები.',
+      'სახისა და სხეულის მასაჟი — მოდუნება, ტონუსის აღდგენა და კანის გამოჯანმრთელება. პროფესიული ტექნიკები.',
     icon: 'hand',
   },
   {
     id: 'permanent',
     title: 'პერმანენტული მაკიაჟი',
     description:
-      'წარბების, ტუჩების და თვალის ხაზის პერმანენტული მაკიაჟი. დახვეწილი, ბუნებრივი და გამძლე შედეგი.',
+      'წარბების, ტუჩებისა და თვალის ხაზის პერმანენტული მაკიაჟი. დახვეწილი, ბუნებრივი და გამძლე შედეგი.',
     icon: 'pencil',
   },
   {

@@ -1,25 +1,27 @@
-import { ContactSection } from '@/features/marketing/components/contact-section';
+import { AboutSection } from '@/features/marketing/components/about-section';
+import { BranchesSection } from '@/features/marketing/components/branches-section';
 import { CoursesSection } from '@/features/marketing/components/courses-section';
+import { CtaBand } from '@/features/marketing/components/cta-band';
 import { HeroSection } from '@/features/marketing/components/hero-section';
 import { LandingHeader } from '@/features/marketing/components/landing-header';
+import { OfferingsSection } from '@/features/marketing/components/offerings-section';
 import { ServicesSection } from '@/features/marketing/components/services-section';
-import { SlideNav } from '@/features/marketing/components/slide-nav';
-import { StatStrip } from '@/features/marketing/components/stat-strip';
 import { Footer } from '@/shared/components/layout/footer';
 
 export const HomePage = () => {
   return (
-    <div className="dark relative h-screen overflow-hidden">
+    <div className="bg-background">
       <LandingHeader />
-      <SlideNav />
-      <main className="h-full overflow-y-scroll snap-y snap-mandatory">
+      <main>
         <HeroSection />
-        <StatStrip />
-        <ServicesSection />
+        <OfferingsSection />
         <CoursesSection />
-        <ContactSection />
-        <Footer />
+        <ServicesSection />
+        <AboutSection />
+        <BranchesSection />
+        <CtaBand />
       </main>
+      <Footer />
     </div>
   );
 };

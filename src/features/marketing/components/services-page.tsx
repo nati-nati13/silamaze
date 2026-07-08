@@ -1,4 +1,4 @@
-import { Droplets, Hand, Pencil, Sparkles, Zap, type LucideIcon } from 'lucide-react';
+import { Hand, Pencil, Sparkles, Syringe, Zap, type LucideIcon } from 'lucide-react';
 
 import { BookingModal } from '@/features/booking/components/booking-modal';
 import { Footer } from '@/shared/components/layout/footer';
@@ -8,7 +8,7 @@ import { SERVICES, type Service } from '@/shared/const/services.const';
 
 const ICON_MAP: Record<Service['icon'], LucideIcon> = {
   sparkles: Sparkles,
-  droplets: Droplets,
+  syringe: Syringe,
   hand: Hand,
   pencil: Pencil,
   zap: Zap,

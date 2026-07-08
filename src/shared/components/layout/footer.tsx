@@ -1,78 +1,144 @@
-import { Facebook, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { APP_NAME } from '@/shared/const/app.const';
-import { FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
+import {
+  EMAIL,
+  FACEBOOK_URL,
+  LOCATIONS,
+  PHONE_NUMBER,
+  PHONE_TEL,
+} from '@/shared/const/contacts.const';
+import { COURSES } from '@/shared/const/courses.const';
+import { SERVICES } from '@/shared/const/services.const';
+
+const SOCIAL_LINK_CLASS =
+  'inline-flex size-9 items-center justify-center rounded-full border border-primary-foreground/20 ' +
+  'text-primary-foreground/70 transition-colors duration-200 hover:border-brand-academy hover:text-brand-academy';
 
 export const Footer = () => {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <Image
                 src="/logo.svg"
                 alt="Dermako Academy"
-                width={40}
-                height={40}
-                className="size-10 rounded-full"
+                width={44}
+                height={44}
+                className="size-11 rounded-full"
               />
-              <span className="flex flex-col leading-none">
-                <span className="font-heading text-2xl font-bold tracking-widest text-background">
-                  DERMAKO
-                </span>
-                <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
-                  ACADEMY
-                </span>
+              <span className="font-heading text-2xl font-bold tracking-widest text-primary-foreground">
+                DERMAKO
               </span>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-background/60">
-              სილამაზე, კოსმეტოლოგია და პროფესიული განათლება.
+            <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-brand-academy">
+              Academy · Beauty Space · Shop
+            </p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">
+              სილამაზის სივრცე — აკადემია, ესთეტიკური მომსახურება და
+              პროფესიონალური პროდუქცია. თბილისსა და საგარეჯოში.
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-secondary mb-4">
-              მისამართები
-            </p>
-            <ul className="space-y-3">
-              {LOCATIONS.map((loc) => (
-                <li key={loc.city} className="flex items-start gap-2">
-                  <MapPin
-                    className="mt-0.5 size-4 shrink-0 text-primary"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <p className="text-sm font-medium text-background">{loc.city}</p>
-                    <p className="text-sm text-background/60">{loc.address}</p>
-                  </div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/60">
+              Academy
+            </h4>
+            <ul className="mt-4 flex flex-col gap-3">
+              {COURSES.map((course) => (
+                <li key={course.id}>
+                  <Link
+                    href="/akademia"
+                    className="text-sm text-primary-foreground/70 transition-colors hover:text-brand-academy"
+                  >
+                    {course.title}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-secondary mb-4">
-              სოციალური
-            </p>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/60">
+              Beauty Space
+            </h4>
+            <ul className="mt-4 flex flex-col gap-3">
+              {SERVICES.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href="/servesebi"
+                    className="text-sm text-primary-foreground/70 transition-colors hover:text-brand-academy"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/60">
+              კონტაქტი
+            </h4>
+            <ul className="mt-4 flex flex-col gap-3 text-sm">
+              <li>
+                <Link
+                  href={`tel:${PHONE_TEL}`}
+                  className="text-primary-foreground/70 transition-colors hover:text-brand-academy"
+                >
+                  {PHONE_NUMBER}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`mailto:${EMAIL}`}
+                  className="text-primary-foreground/70 transition-colors hover:text-brand-academy"
+                >
+                  {EMAIL}
+                </Link>
+              </li>
+              {LOCATIONS.map((loc) => (
+                <li key={loc.city} className="text-primary-foreground/50">
+                  {loc.address}, {loc.city}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/15 pt-8 sm:flex-row">
+          <p className="text-sm text-primary-foreground/60">
+            © 2026 {APP_NAME}. ყველა უფლება დაცულია.
+          </p>
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/"
+              aria-label="Instagram"
+              className={SOCIAL_LINK_CLASS}
+            >
+              <Instagram className="size-4" aria-hidden="true" />
+            </Link>
             <Link
               href={FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-background/80 transition-colors hover:text-primary"
+              aria-label="Facebook"
+              className={SOCIAL_LINK_CLASS}
             >
               <Facebook className="size-4" aria-hidden="true" />
-              Facebook
+            </Link>
+            <Link
+              href={`mailto:${EMAIL}`}
+              aria-label="Email"
+              className={SOCIAL_LINK_CLASS}
+            >
+              <Mail className="size-4" aria-hidden="true" />
             </Link>
           </div>
-        </div>
-
-        <div className="mt-12 border-t border-background/10 pt-8">
-          <p className="text-center text-xs text-background/40">
-            © 2025 {APP_NAME}. ყველა უფლება დაცულია.
-          </p>
         </div>
       </div>
     </footer>
