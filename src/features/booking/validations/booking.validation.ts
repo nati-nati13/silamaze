@@ -7,6 +7,18 @@ export const BookingSchema = z.object({
   time: z.string().min(1),
   name: z.string().min(2, 'სახელი სავალდებულოა'),
   phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
+  message: z.string().optional(),
 });
 
 export type BookingType = z.infer<typeof BookingSchema>;
+
+export const PublicBookingSchema = z.object({
+  service: z.string().min(1),
+  date: z.string().min(1),
+  time: z.string().min(1),
+  name: z.string().min(2, 'სახელი სავალდებულოა'),
+  phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
+  message: z.string().optional(),
+});
+
+export type PublicBookingType = z.infer<typeof PublicBookingSchema>;

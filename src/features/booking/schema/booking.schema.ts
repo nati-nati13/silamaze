@@ -2,7 +2,7 @@ import mongoose, { InferSchemaType, Schema } from 'mongoose';
 
 const BookingSchema = new Schema(
   {
-    userId: { type: String, required: true, index: true },
+    userId: { type: String, default: '', index: true },
     service: { type: String, required: true },
     location: {
       type: String,
@@ -13,6 +13,7 @@ const BookingSchema = new Schema(
     time: { type: String, required: true },
     name: { type: String, required: true, default: '' },
     phone: { type: String, required: true, default: '' },
+    message: { type: String, default: '' },
     status: {
       type: String,
       enum: ['pending', 'confirmed', 'cancelled'],

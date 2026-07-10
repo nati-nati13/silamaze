@@ -15,6 +15,7 @@ export const bookingRepository = {
     time: string;
     name: string;
     phone: string;
+    message?: string;
   }): Promise<string> {
     await mongo.connect();
     const doc = await BookingModel.create({ ...data, status: 'pending' });

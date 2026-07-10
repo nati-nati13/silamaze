@@ -1,6 +1,6 @@
 import { bookingRepository } from '@/features/booking/repository/booking.repository';
 import { Booking } from '@/features/booking/types/booking.types';
-import { BookingType } from '@/features/booking/validations/booking.validation';
+import { BookingType, PublicBookingType } from '@/features/booking/validations/booking.validation';
 import { ServiceResult } from '@/shared/types/common';
 
 export async function createBookingService(
@@ -8,6 +8,13 @@ export async function createBookingService(
   input: BookingType
 ): Promise<ServiceResult<{ message: string }>> {
   await bookingRepository.create({ userId, ...input });
+  return { data: { message: 'Booking created' }, status: 201 };
+}
+
+export async function createPublicBookingService(
+  input: PublicBookingType
+): Promise<ServiceResult<{ message: string }>> {
+  await bookingRepository.create({ userId: '', location: 'თბილისი', ...input });
   return { data: { message: 'Booking created' }, status: 201 };
 }
 
