@@ -22,7 +22,7 @@ Pre-commit hook (Husky) runs `lint → build → test` in sequence and blocks th
 
 Required env vars (see `.env.example`):
 - `NEXTAUTH_URL`, `NEXTAUTH_SECRET` — NextAuth
-- `MONGO_URI` — MongoDB connection string
+- `MONGODB_URI` — MongoDB connection string
 - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` — Google OAuth
 
 ## Request Flow
