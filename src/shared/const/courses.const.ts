@@ -7,6 +7,7 @@ export type Course = {
   /* factual values only — badge/price stay hidden in UI until these are filled */
   duration?: string;
   price?: string;
+  seats?: number;
 };
 
 export const COURSES: Course[] = [
@@ -16,6 +17,9 @@ export const COURSES: Course[] = [
     description:
       'სრული პროფესიული კურსი კლასიკურ კოსმეტოლოგიაში. სახის მოვლის, გაწმენდისა და მკურნალობის ტექნიკები პრაქტიკული სწავლებით.',
     icon: 'sparkles',
+    duration: '2 თვე (80 აკადემიური საათი)',
+    price: '1500 ₾',
+    seats: 10,
   },
   {
     id: 'laser',

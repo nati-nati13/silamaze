@@ -111,6 +111,14 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
                     {course.duration}
                   </span>
                 )}
+                {course.seats !== undefined && (
+                  <span
+                    className="absolute bottom-4 left-4 rounded-md bg-primary/85 px-3 py-1.5 text-xs
+                      font-semibold tracking-widest uppercase text-primary-foreground/90"
+                  >
+                    დარჩენილია {course.seats} ადგილი
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-1 flex-col p-7">
