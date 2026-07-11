@@ -23,7 +23,7 @@ export const HeroSection = () => {
               className="animate-rise animate-rise-1 mt-8 font-heading text-5xl font-semibold
                 leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl"
             >
-              ისწავლე. იზრუნე.{' '}
+              ისწავლე. იბრწყინე.{' '}
               <span className="relative inline-block whitespace-nowrap text-brand-green">
                 განვითარდი.
                 <svg

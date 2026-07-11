@@ -12,6 +12,7 @@ export type GalleryItem = {
   id: string;
   alt: string;
   category: Exclude<GalleryCategory, 'ყველა'>;
+  src?: string;
 };
 
 export const GALLERY_ITEMS: GalleryItem[] = [

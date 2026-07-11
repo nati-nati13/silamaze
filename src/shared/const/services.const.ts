@@ -3,6 +3,7 @@ export type Service = {
   title: string;
   description: string;
   icon: 'sparkles' | 'syringe' | 'hand' | 'pencil' | 'zap';
+  image?: string;
 };
 
 export const SERVICES: Service[] = [

@@ -4,6 +4,9 @@ export type AboutFeature = {
   icon: 'check' | 'users' | 'certificate' | 'sparkles';
 };
 
+// set to '/images/about.webp' when the photo is added to public/images/
+export const ABOUT_IMAGE: string | null = null;
+
 export const ABOUT_FEATURES: AboutFeature[] = [
   {
     title: 'პრაქტიკოსი ოსტატები',

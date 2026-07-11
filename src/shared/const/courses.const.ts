@@ -3,6 +3,7 @@ export type Course = {
   title: string;
   description: string;
   icon: 'sparkles' | 'zap' | 'pencil' | 'syringe' | 'hand';
+  image?: string;
 };
 
 export const COURSES: Course[] = [

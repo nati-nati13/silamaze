@@ -1,4 +1,5 @@
 import { Hand, Pencil, Sparkles, Syringe, Zap, type LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/shared/components/ui/button';
@@ -33,23 +34,38 @@ export const ServicesSection = () => {
             return (
               <article
                 key={service.id}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-8
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card
                   transition-all duration-300 hover:-translate-y-1 hover:border-brand-green/50"
               >
-                <div className="absolute left-0 top-0 h-0.5 w-0 bg-brand-green transition-all duration-500 group-hover:w-full" />
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-green/10 text-brand-green">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-heading text-lg font-semibold leading-tight text-foreground">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {service.description}
-                </p>
+                <div className="absolute left-0 top-0 z-10 h-0.5 w-0 bg-brand-green transition-all duration-500 group-hover:w-full" />
 
-                <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
+                {service.image && (
+                  <div className="relative aspect-video w-full overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 24rem"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+
+                <div className="flex flex-1 flex-col p-8 pb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-green/10 text-brand-green">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="font-heading text-lg font-semibold leading-tight text-foreground">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="m-8 mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
                   <span className="flex flex-col leading-tight">
                     <span className="text-xs uppercase tracking-widest text-muted-foreground">
                       ფასი

@@ -1,6 +1,7 @@
 import { BadgeCheck, Check, Sparkles, Users, type LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 
-import { ABOUT_FEATURES, type AboutFeature } from '@/shared/const/about.const';
+import { ABOUT_FEATURES, ABOUT_IMAGE, type AboutFeature } from '@/shared/const/about.const';
 
 const ICON_MAP: Record<AboutFeature['icon'], LucideIcon> = {
   check: Check,
@@ -50,8 +51,23 @@ export const AboutSection = () => {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green to-primary shadow-2xl">
-            <div className="absolute inset-x-6 bottom-6 rounded-xl border border-primary-foreground/25 bg-primary-foreground/10 p-6 backdrop-blur-sm">
+          <div
+            className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl
+              bg-gradient-to-br from-brand-green to-primary shadow-2xl"
+          >
+            {ABOUT_IMAGE && (
+              <Image
+                src={ABOUT_IMAGE}
+                alt="დერმაკო აკადემია — სწავლება კლინიკის გარემოში"
+                fill
+                sizes="(max-width: 1024px) 100vw, 28rem"
+                className="object-cover"
+              />
+            )}
+            <div
+              className="absolute inset-x-6 bottom-6 rounded-xl border border-primary-foreground/25
+                bg-primary-foreground/10 p-6 backdrop-blur-sm"
+            >
               <p className="font-heading text-lg font-semibold leading-relaxed text-primary-foreground">
                 პრაქტიკა რეალურ კლიენტებზე — სწავლა ჩვენსავე კლინიკაში
               </p>
