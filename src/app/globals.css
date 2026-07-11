@@ -158,6 +158,19 @@
     font-weight: 600;
   }
 
+  /* scroll reveal: applied by <Reveal>, .reveal-in added on intersection */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   @keyframes rise {
     from {
       opacity: 0;
@@ -250,5 +263,11 @@
   .animate-slide-up-4,
   .animate-line-grow {
     animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

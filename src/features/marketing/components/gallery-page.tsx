@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { GalleryTile } from '@/features/marketing/components/gallery-tile';
 import { Footer } from '@/shared/components/layout/footer';
 import { Header } from '@/shared/components/layout/header';
 import {
@@ -9,6 +10,9 @@ import {
   GALLERY_ITEMS,
   type GalleryCategory,
 } from '@/shared/const/gallery.const';
+
+// varied tile heights create the masonry rhythm until real photos define their own
+const HEIGHT_CYCLE = ['h-64', 'h-80', 'h-56', 'h-72', 'h-64', 'h-96'];
 
 export const GalleryPage = () => {
   const [active, setActive] = useState<GalleryCategory>('ყველა');
@@ -50,25 +54,13 @@ export const GalleryPage = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {filtered.map((item) => (
-                <div
+            <div className="columns-2 gap-4 sm:columns-3 lg:columns-4">
+              {filtered.map((item, index) => (
+                <GalleryTile
                   key={item.id}
-                  className="group relative aspect-square overflow-hidden rounded-lg bg-primary/10"
-                >
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/5 p-4 text-center transition-colors duration-300 group-hover:bg-primary/15">
-                    <div
-                      className="size-8 rounded-full bg-primary/20 group-hover:bg-primary/40 transition-colors duration-300"
-                      aria-hidden="true"
-                    />
-                    <p className="text-xs font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-snug">
-                      {item.alt}
-                    </p>
-                    <span className="text-xs tracking-widest uppercase text-primary/60">
-                      {item.category}
-                    </span>
-                  </div>
-                </div>
+                  item={item}
+                  heightClass={HEIGHT_CYCLE[index % HEIGHT_CYCLE.length]}
+                />
               ))}
             </div>
 
