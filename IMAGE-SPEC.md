@@ -164,6 +164,28 @@
 
 ---
 
+## 5. Brand Philosophy — 1 ფოტო
+
+### `brand-philosophy.webp`
+| ველი | სპეცი |
+|---|---|
+| File path | `public/images/brand-philosophy.webp` |
+| ჩართვა | `src/shared/const/offerings.const.ts` → `BRAND_PHILOSOPHY_IMAGE = '/images/brand-philosophy.webp'` |
+| Dimensions | 1200×1600 |
+| Aspect ratio | 3:4 portrait |
+| Composition | კლინიკის მისაღები სივრცე — მარმარილოს რეცეფშენ-დახლი, ადმინისტრატორი თეთრ ტანსაცმელში, უკან ბრენდირებული კედელი; ორსართულიანი ან მაღალჭერიანი ინტერიერი |
+| Camera angle | Eye-level, wide-medium interior shot |
+| Lighting | ფანჯრის თბილი დღის შუქი, რბილი ჩრდილები |
+| Mood | პრემიუმ სტუმართმოყვარეობა, სიმშვიდე, quiet luxury |
+| Background | Cream კედლები, თბილი ხის და bronze დეტალები, მწვანე ტექსტილის/მცენარის აქცენტი |
+| Palette | Cream + marble white + deep green + bronze |
+| Subject | მისაღები სივრცის hero-კადრი ბრენდის ფილოსოფიის სექციისთვის |
+
+**AI Prompt:**
+> Elegant luxury aesthetic clinic reception interior, curved marble reception desk with fluted details, receptionist in white attire working at desk, branded cream wall with subtle logo, tall ceiling with warm wood slat accents, green velvet seating accent, portrait 3:4 wide-medium interior shot, …*(suffix)*
+
+---
+
 ## ჩასმის Workflow (ფოტოების მოსვლისას)
 
 1. ფაილები → `public/images/` (ზუსტი სახელებით, ზემოთ მოცემული სტრუქტურით)
@@ -174,4 +196,4 @@
    - `gallery.const.ts` → `src: '/images/gallery/<id>.webp'`
 3. კომპონენტები ავტომატურად აიტაცებენ — კოდის ცვლილება არ სჭირდება. ფაილი რომ დააკლდეს, gallery tile-ს `onError` fallback აქვს, courses/services/about კი placeholder-ზე რჩება სანამ path არ ჩაიწერება.
 
-**სულ: 22 ფოტო** (hero-photo.webp უკვე არსებობს — ახალი გენერაციისას მასაც იგივე grading მიეცი).
+**სულ: 23 ფოტო** (hero-photo.webp უკვე არსებობს — ახალი გენერაციისას მასაც იგივე grading მიეცი).

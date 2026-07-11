@@ -48,6 +48,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-5xl: calc(var(--radius) * 7.5);
   --spacing-section: 8rem;
   --spacing-section-lg: 11rem;
 }
@@ -156,6 +157,20 @@
     letter-spacing: 0.22em;
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  /* vertical brand label: bottom-to-top reading on section edges */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+
+  /* subtle dot-grid texture for hero/editorial surfaces */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 8%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 1.5rem 1.5rem;
   }
 
   /* scroll reveal: applied by <Reveal>, .reveal-in added on intersection */

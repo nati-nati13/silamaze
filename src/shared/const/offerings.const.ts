@@ -1,47 +1,53 @@
 export type Offering = {
   id: string;
-  kicker: string;
   title: string;
+  label: string;
   description: string;
-  icon: 'graduation' | 'sparkles' | 'shopping';
-  tone: 'green' | 'card' | 'beige';
-  href: string | null;
-  cta?: string;
-  comingSoon?: boolean;
+  icon: 'sparkle' | 'graduation' | 'shopping';
+  href: string;
+  cta: string;
 };
+
+export const BRAND_PHILOSOPHY_IMAGE = '/images/brand-philosophy.webp';
+
+export const BRAND_PHILOSOPHY_IMAGE_ALT =
+  'დერმაკოს პრემიუმ ინტერიერი და მისაღები სივრცე';
 
 export const OFFERINGS: Offering[] = [
   {
-    id: 'courses',
-    kicker: 'Academy',
-    title: 'პროფესიული კურსები',
+    id: 'beauty',
+    title: 'DERMAKO BEAUTY',
+    label: 'ესთეტიკური კლინიკა და მომსახურება',
     description:
-      'ისწავლე თანამედროვე ესთეტიკური მიმართულებები პრაქტიკულ გარემოში და მიიღე სერტიფიკატი.',
-    icon: 'graduation',
-    tone: 'green',
-    href: '/akademia',
-    cta: 'კურსების ნახვა',
+      'უმაღლესი ხარისხის ესთეტიკური მომსახურება, აპარატურული და ინექციური კოსმეტოლოგიის თანამედროვე პროცედურები. ' +
+      'გამოცდილი სპეციალისტები, ინდივიდუალური მიდგომა და თანამედროვე ტექნოლოგიები უზრუნველყოფს უსაფრთხო, ' +
+      'ბუნებრივ და ჰარმონიულ შედეგს.',
+    icon: 'sparkle',
+    href: '/servesebi',
+    cta: 'იხილეთ მომსახურებები',
   },
   {
-    id: 'services',
-    kicker: 'Beauty Space',
-    title: 'ესთეტიკური მომსახურება',
+    id: 'academy',
+    title: 'DERMAKO ACADEMY',
+    label: 'პროფესიული სილამაზის განათლება',
     description:
-      'ლაზერული ეპილაცია, კოსმეტოლოგია, პერმანენტული მაკიაჟი და სხვა პროფესიონალური პროცედურები.',
-    icon: 'sparkles',
-    tone: 'card',
-    href: '/servesebi',
-    cta: 'დაჯავშნე ვიზიტი',
+      'პრაქტიკაზე ორიენტირებული სასწავლო პროგრამები კოსმეტოლოგიის, ლაზერული ეპილაციის, პერმანენტული მაკიაჟისა ' +
+      'და მასაჟის მიმართულებით. თეორიული ცოდნა, ინტენსიური პრაქტიკა რეალურ მოდელებზე და კურსის დასრულების ' +
+      'შემდეგ გაცემული სერტიფიკატი.',
+    icon: 'graduation',
+    href: '/akademia',
+    cta: 'აკადემიის გაცნობა',
   },
   {
     id: 'products',
-    kicker: 'Shop',
-    title: 'პროფესიონალური პროდუქცია',
+    title: 'DERMAKO PRODUCTS',
+    label: 'პროფესიონალური კოსმეტიკური ხაზი',
     description:
-      'აღმოაჩინე ესთეტიკური ინდუსტრიის პროფესიონალური ბრენდები და პროდუქტები.',
+      'პროფესიონალური ხარისხის კოსმეტიკური პროდუქცია ყოველდღიური და პროფესიული გამოყენებისთვის. ' +
+      'ინოვაციური ფორმულები, ეფექტური ინგრედიენტები და სანდო მოვლა, რომელიც იდეალურად ავსებს ' +
+      'ესთეტიკურ პროცედურებს.',
     icon: 'shopping',
-    tone: 'beige',
-    href: null,
-    comingSoon: true,
+    href: '/sachuqari-barati',
+    cta: 'იხილეთ პროდუქცია',
   },
 ];

@@ -1,7 +1,6 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment, useState } from 'react';
@@ -15,44 +14,60 @@ export const LandingHeader = () => {
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-primary-foreground/10 bg-primary">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Image
-            src="/logo.svg"
-            alt="Dermako Academy"
-            width={40}
-            height={40}
-            className="size-10 rounded-full"
-          />
-          <span className="flex flex-col leading-none gap-1">
-            <span className="font-heading text-xl font-bold tracking-widest text-primary-foreground">
-              DERMAKO
-            </span>
-            <span className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
-              ACADEMY
-            </span>
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-6 sm:px-10">
+        <Link href="/" className="flex flex-col gap-1">
+          <span className="font-heading text-2xl font-semibold tracking-widest text-primary-foreground">
+            DERMAKO
+          </span>
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
+            Beauty · Academy · Products
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="ნავიგაცია">
+        <nav className="hidden lg:flex items-center gap-7" aria-label="ნავიგაცია">
           {PUBLIC_NAV_ITEMS.map((item) => {
             if (item.type === 'dropdown') {
+              const isChildActive = item.children.some(
+                (child) => pathname === child.href
+              );
+
               return (
-                <Fragment key={item.label}>
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 ${
-                        pathname === child.href
-                          ? 'text-brand-academy'
-                          : 'text-primary-foreground/70 hover:text-primary-foreground'
-                      }`}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </Fragment>
+                <div key={item.label} className="group relative">
+                  <button
+                    type="button"
+                    className={`inline-flex max-w-20 items-center gap-1 text-center text-xs font-semibold
+                      tracking-widest uppercase leading-relaxed transition-colors duration-200 ${
+                isChildActive
+                  ? 'text-brand-academy'
+                  : 'text-primary-foreground/70 group-hover:text-primary-foreground'
+                }`}
+                  >
+                    {item.label}
+                    <ChevronDown className="size-3 shrink-0" aria-hidden="true" />
+                  </button>
+                  <div
+                    className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4 opacity-0
+                      transition-all duration-200 group-hover:visible group-hover:opacity-100
+                      group-focus-within:visible group-focus-within:opacity-100"
+                  >
+                    <ul className="min-w-48 rounded-md border border-border bg-card p-2 shadow-lg">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className={`block rounded-sm px-3 py-2 text-xs font-semibold tracking-widest uppercase transition-colors ${
+                              pathname === child.href
+                                ? 'text-brand-academy'
+                                : 'text-foreground/70 hover:bg-muted hover:text-foreground'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               );
             }
 
@@ -62,8 +77,8 @@ export const LandingHeader = () => {
                 href={item.href}
                 className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 ${
                   pathname === item.href
-                    ? 'text-primary'
-                    : 'text-foreground/60 hover:text-primary'
+                    ? 'text-brand-academy'
+                    : 'text-primary-foreground/70 hover:text-primary-foreground'
                 }`}
               >
                 {item.label}
@@ -75,15 +90,14 @@ export const LandingHeader = () => {
         <div className="flex items-center gap-3">
           <Button
             asChild
-            size="sm"
-            className="hidden bg-primary-foreground font-semibold text-primary hover:bg-primary-foreground/90 md:inline-flex"
+            className="hidden bg-brand-academy font-semibold text-primary-foreground hover:bg-brand-academy/90 lg:inline-flex"
           >
             <Link href="/kontakti">დაჯავშნა</Link>
           </Button>
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden text-primary-foreground/80 hover:text-primary-foreground"
+            className="lg:hidden text-primary-foreground/80 hover:text-primary-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="მენიუ"
           >
@@ -94,7 +108,7 @@ export const LandingHeader = () => {
 
       {mobileOpen && (
         <nav
-          className="md:hidden border-t border-primary-foreground/10 bg-primary px-6 py-4"
+          className="lg:hidden border-t border-primary-foreground/10 bg-primary px-6 py-4"
           aria-label="მობილური ნავიგაცია"
         >
           <ul className="flex flex-col gap-4">
@@ -127,8 +141,8 @@ export const LandingHeader = () => {
                     href={item.href}
                     className={`block text-sm font-semibold tracking-widest uppercase transition-colors ${
                       pathname === item.href
-                        ? 'text-primary'
-                        : 'text-foreground/60 hover:text-primary'
+                        ? 'text-brand-academy'
+                        : 'text-primary-foreground/70 hover:text-primary-foreground'
                     }`}
                     onClick={() => setMobileOpen(false)}
                   >
