@@ -1,4 +1,5 @@
 import { AboutSection } from '@/features/marketing/components/about-section';
+import { AcademyAboutSection } from '@/features/marketing/components/academy-about-section';
 import { BranchesSection } from '@/features/marketing/components/branches-section';
 import { CoursesSection } from '@/features/marketing/components/courses-section';
 import { CtaBand } from '@/features/marketing/components/cta-band';
@@ -21,6 +22,9 @@ export const HomePage = () => {
         <HeroSection />
         <Reveal>
           <OfferingsSection />
+        </Reveal>
+        <Reveal>
+          <AcademyAboutSection />
         </Reveal>
         <Reveal>
           <CoursesSection />
