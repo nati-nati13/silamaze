@@ -4,6 +4,9 @@ export type Course = {
   description: string;
   icon: 'sparkles' | 'zap' | 'pencil' | 'syringe' | 'hand';
   image?: string;
+  /* factual values only — badge/price stay hidden in UI until these are filled */
+  duration?: string;
+  price?: string;
 };
 
 export const COURSES: Course[] = [
