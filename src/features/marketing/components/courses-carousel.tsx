@@ -103,14 +103,12 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
                     />
                   </div>
                 )}
-                {course.duration && (
-                  <span
-                    className="absolute top-4 left-4 rounded-md bg-primary/85 px-3 py-1.5 text-xs
-                      font-semibold tracking-widest uppercase text-brand-academy"
-                  >
-                    {course.duration}
-                  </span>
-                )}
+                <span
+                  className="absolute top-4 left-4 rounded-md bg-primary/85 px-3 py-1.5 text-xs
+                    font-semibold tracking-widest uppercase text-brand-academy"
+                >
+                  {course.duration ?? 'მალე დაზუსტდება'}
+                </span>
                 {course.seats !== undefined && (
                   <span
                     className="absolute bottom-4 left-4 rounded-md bg-primary/85 px-3 py-1.5 text-xs
@@ -141,10 +139,12 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
                       {course.price}
                     </span>
                   ) : (
-                    <span aria-hidden="true" />
+                    <span className="text-sm text-primary-foreground/60">
+                      მალე დაზუსტდება
+                    </span>
                   )}
                   <Link
-                    href="/akademia"
+                    href={`/akademia/${course.id}`}
                     className="inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold
                       text-primary-foreground transition-colors hover:text-brand-academy
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-academy"
