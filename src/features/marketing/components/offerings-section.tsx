@@ -18,7 +18,7 @@ const ICON_MAP: Record<Offering['icon'], LucideIcon> = {
 
 export const OfferingsSection = () => {
   return (
-    <section id="slide-offerings" className="relative bg-background py-20 sm:py-28">
+    <section id="slide-offerings" className="relative bg-card py-20 sm:py-28">
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10">
         <div className="max-w-2xl">
           <p className="eyebrow text-brand-academy">ბრენდის ფილოსოფია</p>
@@ -44,6 +44,7 @@ export const OfferingsSection = () => {
               return (
                 <article
                   key={offering.id}
+                  id={offering.id === 'products' ? 'products' : undefined}
                   className="group rounded-2xl border border-border bg-card p-8 transition-all
                     duration-300 hover:-translate-y-1 hover:border-brand-green/40 hover:shadow-lg"
                 >

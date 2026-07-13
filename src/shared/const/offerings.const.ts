@@ -47,7 +47,7 @@ export const OFFERINGS: Offering[] = [
       'ინოვაციური ფორმულები, ეფექტური ინგრედიენტები და სანდო მოვლა, რომელიც იდეალურად ავსებს ' +
       'ესთეტიკურ პროცედურებს.',
     icon: 'shopping',
-    href: '/sachuqari-barati',
+    href: '/#products',
     cta: 'იხილეთ პროდუქცია',
   },
 ];
