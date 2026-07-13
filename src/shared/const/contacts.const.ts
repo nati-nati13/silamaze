@@ -25,5 +25,5 @@ export const LOCATIONS: Location[] = [
 
 export const PHONE_NUMBER = '+995 555 12 34 56';
 export const PHONE_TEL = '+995555123456';
-export const EMAIL = 'info@dermako.ge';
+export const EMAIL = 'dermako.academy8@gmail.com';
 export const FACEBOOK_URL = 'https://www.facebook.com/mariam.mako.520412';
