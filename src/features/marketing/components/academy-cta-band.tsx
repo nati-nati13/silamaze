@@ -11,7 +11,7 @@ export const AcademyCtaBand = () => {
             lg:flex-row lg:items-center lg:justify-between"
         >
           <div className="max-w-2xl">
-            <p className="eyebrow text-brand-academy">სამომავლო პერსპექტივა</p>
+            <p className="eyebrow text-brand-academy">სამედიცინო პერსპექტივა</p>
             <h2
               className="mt-3 font-heading text-2xl font-semibold leading-snug tracking-normal
                 text-primary-foreground sm:text-3xl"
