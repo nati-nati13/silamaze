@@ -1,21 +1,11 @@
-import { CheckCircle, Hand, Pencil, Sparkles, Syringe, Zap, type LucideIcon } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
-import { EnrollButton } from '@/features/enrollment/components/enroll-button';
+import { CoursesCarousel } from '@/features/marketing/components/courses-carousel';
+import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
-import { Header } from '@/shared/components/layout/header';
 import { Button } from '@/shared/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 import { FACEBOOK_URL } from '@/shared/const/contacts.const';
-import { COURSES, type Course } from '@/shared/const/courses.const';
-
-const ICON_MAP: Record<Course['icon'], LucideIcon> = {
-  sparkles: Sparkles,
-  zap: Zap,
-  pencil: Pencil,
-  syringe: Syringe,
-  hand: Hand,
-};
 
 const WHY_US = [
   'გამოცდილი, სერტიფიცირებული ინსტრუქტორები',
@@ -28,65 +18,30 @@ const WHY_US = [
 export const AcademyPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
-        <section className="bg-foreground py-20">
-          <div className="mx-auto max-w-7xl px-6 sm:px-10 text-center">
-            <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
-              Dermako Academy
-            </p>
-            <h1 className="mt-3 font-heading text-5xl font-bold text-background sm:text-6xl">
-              აკადემია
-            </h1>
-            <p className="mt-4 text-base text-background/70 max-w-xl mx-auto">
-              გახდი პროფესიონალი კოსმეტოლოგი. ისწავლე საუკეთესო ინსტრუქტორებთან.
-            </p>
-          </div>
-        </section>
-
-        <section className="py-24 bg-background">
-          <div className="mx-auto max-w-7xl px-6 sm:px-10">
-            <header className="mb-16 text-center">
-              <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
-                კურსები
-              </p>
-              <h2 className="mt-3 font-heading text-4xl font-bold text-foreground">
-                პროფესიული პროგრამები
-              </h2>
-            </header>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-              {COURSES.map((course) => {
-                const Icon = ICON_MAP[course.icon];
-                return (
-                  <Card
-                    key={course.id}
-                    className="group relative gap-0 overflow-hidden border-secondary/20 transition-shadow duration-300 hover:shadow-lg"
+      <LandingHeader />
+      <main className="flex-1 pt-20">
+        <section className="bg-primary py-20 sm:py-28">
+          <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
+            <CoursesCarousel
+              header={
+                <>
+                  <p className="eyebrow text-brand-academy">
+                    აკადემიის პროგრამები
+                  </p>
+                  <h1
+                    className="mt-4 font-heading text-4xl font-semibold leading-snug tracking-normal
+                      text-primary-foreground sm:text-5xl"
                   >
-                    <div
-                      className="absolute top-0 left-0 h-1 w-full bg-secondary"
-                      aria-hidden="true"
-                    />
-                    <CardHeader className="pt-8 pb-3">
-                      <span className="inline-flex size-12 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-                        <Icon className="size-5" aria-hidden="true" />
-                      </span>
-                    </CardHeader>
-                    <CardContent>
-                      <h3 className="font-heading text-lg font-semibold text-foreground">
-                        {course.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {course.description}
-                      </p>
-                      <div className="mt-6">
-                        <EnrollButton courseId={course.id} courseTitle={course.title} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+                    პროფესიული კურსები
+                  </h1>
+                  <p className="mt-5 text-base leading-relaxed text-primary-foreground/75">
+                    შეისწავლე ესთეტიკური კოსმეტოლოგია, ლაზერული ეპილაცია,
+                    პერმანენტული მაკიაჟი და მასაჟი პრაქტიკაზე ორიენტირებული
+                    სასწავლო პროგრამებით.
+                  </p>
+                </>
+              }
+            />
           </div>
         </section>
 
@@ -94,7 +49,7 @@ export const AcademyPage = () => {
           <div className="mx-auto max-w-7xl px-6 sm:px-10">
             <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 items-center">
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
+                <p className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
                   რატომ Dermako
                 </p>
                 <h2 className="mt-3 font-heading text-4xl font-bold text-foreground">
