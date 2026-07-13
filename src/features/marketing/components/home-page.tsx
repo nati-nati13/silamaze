@@ -1,5 +1,6 @@
 import { AboutSection } from '@/features/marketing/components/about-section';
 import { AcademyAboutSection } from '@/features/marketing/components/academy-about-section';
+import { AcademyCtaBand } from '@/features/marketing/components/academy-cta-band';
 import { BranchesSection } from '@/features/marketing/components/branches-section';
 import { CoursesSection } from '@/features/marketing/components/courses-section';
 import { CtaBand } from '@/features/marketing/components/cta-band';
@@ -31,6 +32,9 @@ export const HomePage = () => {
         </Reveal>
         <Reveal>
           <ServicesSection />
+        </Reveal>
+        <Reveal>
+          <AcademyCtaBand />
         </Reveal>
         <Reveal>
           <GalleryPreviewSection />
