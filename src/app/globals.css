@@ -173,6 +173,14 @@
     background-size: 1.5rem 1.5rem;
   }
 
+  /* hide scrollbar on carousels while keeping scrollability */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* scroll reveal: applied by <Reveal>, .reveal-in added on intersection */
   .reveal {
     opacity: 0;

@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { COURSES, type Course } from '@/shared/const/courses.const';
 
@@ -36,6 +36,7 @@ const ARROW_CLASS = `inline-flex size-10 items-center justify-center rounded-ful
 
 export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
 
   const scrollByCard = (direction: 1 | -1) => {
     const track = trackRef.current;
@@ -45,8 +46,36 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
     track.scrollBy({ left: direction * step, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    if (paused) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const id = setInterval(() => {
+      const track = trackRef.current;
+      if (!track) return;
+      const atEnd =
+        track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+      if (atEnd) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        const card = track.querySelector('article');
+        const step = card ? card.clientWidth + 24 : track.clientWidth / 2;
+        track.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, 4000);
+
+    return () => clearInterval(id);
+  }, [paused]);
+
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+    >
       <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">{header}</div>
         <div className="flex gap-2.5">
@@ -74,7 +103,7 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
         role="region"
         aria-label="კურსების კარუსელი"
         tabIndex={0}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4
+        className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-academy"
       >
         {COURSES.map((course) => {
