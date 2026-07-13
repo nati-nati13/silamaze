@@ -20,9 +20,10 @@ export const AcademyPage = () => {
     <div className="flex min-h-screen flex-col">
       <LandingHeader />
       <main className="flex-1 pt-20">
-        <section className="bg-primary py-20 sm:py-28">
+        <section className="bg-background py-20 sm:py-28">
           <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
             <CoursesCarousel
+              tone="light"
               header={
                 <>
                   <p className="eyebrow text-brand-academy">
@@ -30,11 +31,11 @@ export const AcademyPage = () => {
                   </p>
                   <h1
                     className="mt-4 font-heading text-4xl font-semibold leading-snug tracking-normal
-                      text-primary-foreground sm:text-5xl"
+                      text-foreground sm:text-5xl"
                   >
                     პროფესიული კურსები
                   </h1>
-                  <p className="mt-5 text-base leading-relaxed text-primary-foreground/75">
+                  <p className="mt-5 text-base leading-relaxed text-muted-foreground">
                     შეისწავლე ესთეტიკური კოსმეტოლოგია, ლაზერული ეპილაცია,
                     პერმანენტული მაკიაჟი და მასაჟი პრაქტიკაზე ორიენტირებული
                     სასწავლო პროგრამებით.
