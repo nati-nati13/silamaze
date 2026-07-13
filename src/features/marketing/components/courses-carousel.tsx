@@ -144,7 +144,7 @@ export const CoursesCarousel = ({ header }: CoursesCarouselProps) => {
                     </span>
                   )}
                   <Link
-                    href={`/akademia/${course.id}`}
+                    href="/akademia"
                     className="inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold
                       text-primary-foreground transition-colors hover:text-brand-academy
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-academy"
