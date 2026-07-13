@@ -92,7 +92,7 @@ export const LandingHeader = () => {
             asChild
             className="hidden bg-brand-academy font-semibold text-primary-foreground hover:bg-brand-academy/90 lg:inline-flex"
           >
-            <Link href="/kontakti">დაჯავშნა</Link>
+            <Link href="/#slide-reservation">დაჯავშნა</Link>
           </Button>
           <Button
             variant="ghost"
