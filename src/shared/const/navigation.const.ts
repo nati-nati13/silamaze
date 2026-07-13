@@ -26,7 +26,7 @@ export const PUBLIC_NAV_ITEMS: PublicNavItem[] = [
   { type: 'link', href: '/', label: 'მთავარი' },
   { type: 'link', href: '/akademia', label: 'აკადემია' },
   { type: 'link', href: '/servesebi', label: 'სერვისები' },
-  { type: 'link', href: '/#slide-offerings', label: 'პროდუქცია' },
+  { type: 'link', href: '/produqcia', label: 'პროდუქცია' },
   { type: 'link', href: '/galeria', label: 'გალერეა' },
   {
     type: 'dropdown',
