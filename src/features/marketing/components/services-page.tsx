@@ -1,8 +1,8 @@
 import { Hand, Pencil, Sparkles, Syringe, Zap, type LucideIcon } from 'lucide-react';
 
 import { BookingModal } from '@/features/booking/components/booking-modal';
+import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
-import { Header } from '@/shared/components/layout/header';
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 import { SERVICES, type Service } from '@/shared/const/services.const';
 
@@ -17,11 +17,11 @@ const ICON_MAP: Record<Service['icon'], LucideIcon> = {
 export const ServicesPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
+      <LandingHeader />
+      <main className="flex-1 pt-20">
         <section className="bg-muted py-20">
           <div className="mx-auto max-w-7xl px-6 sm:px-10 text-center">
-            <p className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            <p className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
               Dermako Academy
             </p>
             <h1 className="mt-3 font-heading text-5xl font-bold text-foreground sm:text-6xl">

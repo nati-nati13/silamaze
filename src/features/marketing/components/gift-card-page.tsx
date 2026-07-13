@@ -1,17 +1,17 @@
 import { CheckCircle, Facebook, Gift } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from '@/shared/components/ui/button';
+import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
-import { Header } from '@/shared/components/layout/header';
+import { Button } from '@/shared/components/ui/button';
 import { FACEBOOK_URL } from '@/shared/const/contacts.const';
 import { GIFT_CARD_CONDITIONS, GIFT_CARD_NOMINALS } from '@/shared/const/gift-card.const';
 
 export const GiftCardPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
+      <LandingHeader />
+      <main className="flex-1 pt-20">
         <section className="bg-muted py-20">
           <div className="mx-auto max-w-7xl px-6 sm:px-10">
             <p className="text-xs font-semibold tracking-widest uppercase text-primary">
