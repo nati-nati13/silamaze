@@ -28,6 +28,7 @@ export const ReservationForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [giftCardCode, setGiftCardCode] = useState<string | null>(null);
 
   const form = useForm<ReservationType>({
     resolver: zodResolver(ReservationSchema),
@@ -61,7 +62,7 @@ export const ReservationForm = () => {
     try {
       if (values.type === 'giftcard') {
         const nominal = GIFT_CARD_NOMINALS.find((n) => n.id === values.selection);
-        await http.post('/gift-cards/public', {
+        const res = await http.post<{ giftCardCode: string }>('/gift-cards/public', {
           amount: nominal?.amount ?? values.selection,
           usage: values.usage,
           delivery: values.delivery,
@@ -71,6 +72,7 @@ export const ReservationForm = () => {
           email: values.email,
           message: values.message,
         });
+        setGiftCardCode(res?.giftCardCode ?? null);
       } else if (!session) {
         // anonymous lead — staff confirms by phone
         await http.post('/bookings/public', {
@@ -130,7 +132,24 @@ export const ReservationForm = () => {
         <p className="mt-2 text-sm text-muted-foreground">
           ჩვენი გუნდი მალე დაგიკავშირდებათ.
         </p>
-        <Button className="mt-6" variant="outline" onClick={() => setSuccess(false)}>
+        {giftCardCode && (
+          <div className="mt-6 rounded-xl border border-border bg-muted p-4">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              ბარათის კოდი
+            </p>
+            <p className="mt-1 font-mono text-lg font-bold tracking-wider text-foreground">
+              {giftCardCode}
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              შეინახეთ ეს კოდი — დაგჭირდებათ ბარათის გასააქტიურებლად.
+            </p>
+          </div>
+        )}
+        <Button
+          className="mt-6"
+          variant="outline"
+          onClick={() => { setSuccess(false); setGiftCardCode(null); }}
+        >
           ახალი განაცხადი
         </Button>
       </div>

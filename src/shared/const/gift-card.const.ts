@@ -62,6 +62,29 @@ export const GIFT_CARD_QUICK_MESSAGES: string[] = [
   'გისურვებ ბედნიერებასა და სილამაზეს!',
 ];
 
+export const GIFT_CARD_STATUSES = [
+  'pending',
+  'awaiting_payment',
+  'active',
+  'partially_used',
+  'redeemed',
+  'expired',
+  'cancelled',
+] as const;
+
+export type GiftCardStatus = (typeof GIFT_CARD_STATUSES)[number];
+
+// prepared for future status-transition workflow (not enforced yet)
+export const GIFT_CARD_STATUS_TRANSITIONS: Record<GiftCardStatus, GiftCardStatus[]> = {
+  pending: ['awaiting_payment', 'cancelled'],
+  awaiting_payment: ['active', 'cancelled'],
+  active: ['partially_used', 'redeemed', 'expired', 'cancelled'],
+  partially_used: ['redeemed', 'expired'],
+  redeemed: [],
+  expired: [],
+  cancelled: [],
+};
+
 export const GIFT_CARD_CONDITIONS: string[] = [
   'ძალაშია თბილისსა და საგარეჯოში',
   'ნებისმიერი მომსახურება ან პრემიუმ კოსმეტიკის შეძენა',

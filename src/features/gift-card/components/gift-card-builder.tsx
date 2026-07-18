@@ -42,6 +42,7 @@ export const GiftCardBuilder = () => {
   const [error, setError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [orderCode, setOrderCode] = useState<string | null>(null);
 
   const patch = (p: GiftCardPatch) => {
     if ('phone' in p) setPhoneError(null);
@@ -66,7 +67,7 @@ export const GiftCardBuilder = () => {
     setLoading(true);
     setError(null);
     try {
-      await http.post('/gift-cards/public', {
+      const res = await http.post<{ giftCardCode: string }>('/gift-cards/public', {
         amount: amountLabel || 'შეთანხმებით',
         usage: state.usage,
         delivery: 'ელექტრონული',
@@ -77,6 +78,7 @@ export const GiftCardBuilder = () => {
         email: state.email,
         message: state.message,
       });
+      setOrderCode(res?.giftCardCode ?? null);
       setSuccess(true);
     } catch {
       setError('შეცდომა. სცადეთ კვლავ.');
@@ -95,7 +97,30 @@ export const GiftCardBuilder = () => {
         <p className="mt-2 text-sm text-muted-foreground">
           ჩვენი გუნდი მალე დაგიკავშირდებათ ბარათის გასაფორმებლად.
         </p>
-        <Button className="mt-6" variant="outline" onClick={() => { setState(INITIAL); setSuccess(false); setPhoneError(null); setEmailError(null); }}>
+        {orderCode && (
+          <div className="mt-6 rounded-xl border border-border bg-muted p-4">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              ბარათის კოდი
+            </p>
+            <p className="mt-1 font-mono text-lg font-bold tracking-wider text-foreground">
+              {orderCode}
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              შეინახეთ ეს კოდი — დაგჭირდებათ ბარათის გასააქტიურებლად.
+            </p>
+          </div>
+        )}
+        <Button
+          className="mt-6"
+          variant="outline"
+          onClick={() => {
+            setState(INITIAL);
+            setSuccess(false);
+            setPhoneError(null);
+            setEmailError(null);
+            setOrderCode(null);
+          }}
+        >
           ახალი ბარათი
         </Button>
       </div>
