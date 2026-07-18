@@ -15,8 +15,10 @@ const GiftCardOrderSchema = new Schema(
       required: true,
     },
     address: { type: String, default: '' },
+    recipient: { type: String, default: '' },
+    sender: { type: String, default: '' },
     name: { type: String, required: true, default: '' },
-    phone: { type: String, required: true, default: '' },
+    phone: { type: String, default: '' },
     email: { type: String, default: '' },
     message: { type: String, default: '' },
     status: {

@@ -8,8 +8,10 @@ export const giftCardRepository = {
     usage: string;
     delivery: string;
     address?: string;
+    recipient?: string;
+    sender?: string;
     name: string;
-    phone: string;
+    phone?: string;
     email?: string;
     message?: string;
   }): Promise<string> {

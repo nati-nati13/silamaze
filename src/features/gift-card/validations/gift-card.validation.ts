@@ -6,8 +6,10 @@ export const PublicGiftCardSchema = z
     usage: z.enum(['თბილისი', 'საგარეჯო', 'ორივე']),
     delivery: z.enum(['ელექტრონული', 'ბეჭდური']),
     address: z.string().optional(),
+    recipient: z.string().optional(),
+    sender: z.string().optional(),
     name: z.string().min(2, 'სახელი სავალდებულოა'),
-    phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
+    phone: z.string().min(5, 'ტელეფონი სავალდებულოა').optional().or(z.literal('')),
     email: z.string().email().optional().or(z.literal('')),
     message: z.string().optional(),
   })
