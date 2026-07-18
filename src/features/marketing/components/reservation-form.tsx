@@ -14,11 +14,13 @@ import { Button } from '@/shared/components/ui/button';
 import { Form } from '@/shared/components/ui/form';
 import { RESERVATION_DISCLAIMER } from '@/shared/const/booking.const';
 import { COURSES } from '@/shared/const/courses.const';
+import { GIFT_CARD_NOMINALS } from '@/shared/const/gift-card.const';
 import { http } from '@/shared/lib/http';
 
 const TABS = [
   { value: 'service' as const, label: 'ესთეტიკური სერვისი' },
   { value: 'course' as const, label: 'აკადემიის კურსი' },
+  { value: 'giftcard' as const, label: 'სასაჩუქრე ბარათი' },
 ];
 
 export const ReservationForm = () => {
@@ -43,7 +45,6 @@ export const ReservationForm = () => {
   });
 
   const type = form.watch('type');
-  const isCourse = type === 'course';
 
   const setType = (next: (typeof TABS)[number]['value']) => {
     form.setValue('type', next);
@@ -58,7 +59,18 @@ export const ReservationForm = () => {
     const serviceName = values.type === 'course' ? course?.title ?? values.selection : values.selection;
 
     try {
-      if (!session) {
+      if (values.type === 'giftcard') {
+        const nominal = GIFT_CARD_NOMINALS.find((n) => n.id === values.selection);
+        await http.post('/gift-cards/public', {
+          amount: nominal?.amount ?? values.selection,
+          usage: values.usage,
+          delivery: values.delivery,
+          name: values.name,
+          phone: values.phone,
+          email: values.email,
+          message: values.message,
+        });
+      } else if (!session) {
         // anonymous lead — staff confirms by phone
         await http.post('/bookings/public', {
           service: serviceName,
@@ -87,7 +99,18 @@ export const ReservationForm = () => {
         });
       }
       setSuccess(true);
-      form.reset({ ...form.getValues(), name: '', phone: '', email: '', selection: '', date: '', time: '', message: '' });
+      form.reset({
+        ...form.getValues(),
+        name: '',
+        phone: '',
+        email: '',
+        selection: '',
+        date: '',
+        time: '',
+        message: '',
+        usage: undefined,
+        delivery: undefined,
+      });
     } catch {
       setError('შეცდომა. სცადეთ კვლავ.');
     } finally {
@@ -119,7 +142,7 @@ export const ReservationForm = () => {
       </h3>
       <div className="mt-6 h-px w-full bg-border" aria-hidden="true" />
 
-      <div className="mt-6 grid grid-cols-2 gap-3">
+      <div className="mt-6 grid grid-cols-3 gap-3">
         {TABS.map((tab) => (
           <button
             key={tab.value}
@@ -138,7 +161,7 @@ export const ReservationForm = () => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-5">
-          <ReservationFields control={form.control} isCourse={isCourse} />
+          <ReservationFields control={form.control} type={type} />
 
           {error && <p className="text-sm font-medium text-destructive">{error}</p>}
 

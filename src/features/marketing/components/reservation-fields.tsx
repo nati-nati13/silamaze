@@ -1,6 +1,8 @@
 import { type Control } from 'react-hook-form';
 
 import { ReservationType } from '@/features/booking/validations/reservation.validation';
+import { ReservationGiftCardFields } from '@/features/marketing/components/reservation-giftcard-fields';
+import { ReservationVisitFields } from '@/features/marketing/components/reservation-visit-fields';
 import {
   FormControl,
   FormField,
@@ -10,21 +12,29 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { NativeSelect } from '@/shared/components/ui/select';
-import { AVAILABLE_TIMES, BOOKING_SERVICES } from '@/shared/const/booking.const';
-import { LOCATIONS } from '@/shared/const/contacts.const';
+import { BOOKING_SERVICES } from '@/shared/const/booking.const';
 import { COURSES } from '@/shared/const/courses.const';
+import { GIFT_CARD_NOMINALS } from '@/shared/const/gift-card.const';
 
 const TEXTAREA_CLASS =
   'flex min-h-24 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ' +
   'transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 ' +
   'focus-visible:ring-ring';
 
-type Props = {
-  control: Control<ReservationType>;
-  isCourse: boolean;
+const SELECTION_LABEL: Record<ReservationType['type'], string> = {
+  service: 'აირჩიე ესთეტიკური სერვისი *',
+  course: 'აირჩიე სასწავლო კურსი *',
+  giftcard: 'აირჩიე ბარათის ნომინალი *',
 };
 
-export const ReservationFields = ({ control, isCourse }: Props) => {
+type Props = {
+  control: Control<ReservationType>;
+  type: ReservationType['type'];
+};
+
+export const ReservationFields = ({ control, type }: Props) => {
+  const isGiftCard = type === 'giftcard';
+
   return (
     <>
       <FormField
@@ -32,19 +42,24 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
         name="selection"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>
-              {isCourse ? 'აირჩიე სასწავლო კურსი *' : 'აირჩიე ესთეტიკური სერვისი *'}
-            </FormLabel>
+            <FormLabel>{SELECTION_LABEL[type]}</FormLabel>
             <FormControl>
               <NativeSelect {...field}>
                 <option value="">— აირჩიეთ სია ასარჩევად —</option>
-                {isCourse
-                  ? COURSES.map((c) => (
+                {type === 'giftcard' &&
+                  GIFT_CARD_NOMINALS.map((n) => (
+                    <option key={n.id} value={n.id}>
+                      {n.amount} — {n.description}
+                    </option>
+                  ))}
+                {type === 'course' &&
+                  COURSES.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.price ? `${c.title} (${c.price})` : c.title}
                     </option>
-                  ))
-                  : BOOKING_SERVICES.map((s) => (
+                  ))}
+                {type === 'service' &&
+                  BOOKING_SERVICES.map((s) => (
                     <option key={s} value={s}>
                       {s}
                     </option>
@@ -56,39 +71,11 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
         )}
       />
 
-      <FormField
-        control={control}
-        name="location"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>აირჩიე ფილიალი (მდებარეობა) *</FormLabel>
-            <FormControl>
-              <div className="grid grid-cols-2 gap-3">
-                {LOCATIONS.map((loc) => (
-                  <button
-                    key={loc.city}
-                    type="button"
-                    onClick={() => field.onChange(loc.city)}
-                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-                      field.value === loc.city
-                        ? 'border-primary bg-primary/10'
-                        : 'border-border hover:border-brand-green/50'
-                    }`}
-                  >
-                    <span className="block text-sm font-semibold text-foreground">
-                      დერმაკო {loc.city}
-                    </span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">
-                      {loc.address}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {isGiftCard ? (
+        <ReservationGiftCardFields control={control} />
+      ) : (
+        <ReservationVisitFields control={control} />
+      )}
 
       <FormField
         control={control}
@@ -132,53 +119,23 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
         )}
       />
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <FormField
-          control={control}
-          name="date"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>თარიღი *</FormLabel>
-              <FormControl>
-                <Input type="date" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="time"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>სასურველი დრო *</FormLabel>
-              <FormControl>
-                <NativeSelect {...field}>
-                  <option value="">— აირჩიეთ დრო —</option>
-                  {AVAILABLE_TIMES.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </NativeSelect>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
       <FormField
         control={control}
         name="message"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>დამატებითი კომენტარი ან დეტალები</FormLabel>
+            <FormLabel>
+              {isGiftCard ? 'მილოცვის ტექსტი' : 'დამატებითი კომენტარი ან დეტალები'}
+            </FormLabel>
             <FormControl>
               <textarea
                 {...field}
                 rows={3}
-                placeholder="მაგ: მაქვს მგრძნობიარე კანი, ან კითხვები პროცედურასთან დაკავშირებით..."
+                placeholder={
+                  isGiftCard
+                    ? 'მაგ: გილოცავ დაბადების დღეს!'
+                    : 'მაგ: მაქვს მგრძნობიარე კანი, ან კითხვები პროცედურასთან დაკავშირებით...'
+                }
                 className={TEXTAREA_CLASS}
               />
             </FormControl>
