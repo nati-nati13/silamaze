@@ -25,9 +25,10 @@ const USAGE_OPTIONS = [
 type Props = {
   state: GiftCardBuilderState;
   onChange: (patch: GiftCardPatch) => void;
+  phoneError?: string | null;
 };
 
-export const GiftCardPersonalize = ({ state, onChange }: Props) => {
+export const GiftCardPersonalize = ({ state, onChange, phoneError }: Props) => {
   return (
     <div>
       <p className="eyebrow text-brand-academy">2. პერსონალიზაცია</p>
@@ -67,6 +68,20 @@ export const GiftCardPersonalize = ({ state, onChange }: Props) => {
             value={state.sender}
             onChange={(e) => onChange({ sender: e.target.value })}
           />
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-foreground">შემძენის ტელეფონი *</label>
+          <Input
+            className="mt-1.5"
+            type="tel"
+            placeholder="მაგ: +995 599 12 34 56"
+            value={state.phone}
+            onChange={(e) => onChange({ phone: e.target.value })}
+          />
+          {phoneError && (
+            <p className="mt-1.5 text-sm font-medium text-destructive">{phoneError}</p>
+          )}
         </div>
 
         <div>

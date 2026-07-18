@@ -11,7 +11,7 @@ export const giftCardRepository = {
     recipient?: string;
     sender?: string;
     name: string;
-    phone?: string;
+    phone: string;
     email?: string;
     message?: string;
   }): Promise<string> {

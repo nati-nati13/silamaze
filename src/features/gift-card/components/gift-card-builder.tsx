@@ -22,6 +22,7 @@ const INITIAL: GiftCardBuilderState = {
   purpose: 'gift',
   recipient: '',
   sender: '',
+  phone: '',
   usage: 'ორივე',
   message: '',
   themeId: 'green',
@@ -38,14 +39,22 @@ export const GiftCardBuilder = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
-  const patch = (p: GiftCardPatch) => setState((s) => ({ ...s, ...p }));
+  const patch = (p: GiftCardPatch) => {
+    if ('phone' in p) setPhoneError(null);
+    setState((s) => ({ ...s, ...p }));
+  };
 
   const nominal = GIFT_CARD_NOMINALS.find((n) => n.id === state.selectionId);
   const amountLabel = state.mode === 'amount' ? nominal?.amount ?? '' : state.selectionId;
   const gradient = CARD_THEMES.find((t) => t.id === state.themeId)?.gradient ?? CARD_THEMES[0].gradient;
 
   const onOrder = async () => {
+    if (state.phone.trim().length < 5) {
+      setPhoneError('შეიყვანეთ ტელეფონის ნომერი');
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -56,6 +65,7 @@ export const GiftCardBuilder = () => {
         recipient: state.recipient,
         sender: state.sender,
         name: state.sender || state.recipient || 'სტუმარი',
+        phone: state.phone,
         message: state.message,
       });
       setSuccess(true);
@@ -76,7 +86,7 @@ export const GiftCardBuilder = () => {
         <p className="mt-2 text-sm text-muted-foreground">
           ჩვენი გუნდი მალე დაგიკავშირდებათ ბარათის გასაფორმებლად.
         </p>
-        <Button className="mt-6" variant="outline" onClick={() => { setState(INITIAL); setSuccess(false); }}>
+        <Button className="mt-6" variant="outline" onClick={() => { setState(INITIAL); setSuccess(false); setPhoneError(null); }}>
           ახალი ბარათი
         </Button>
       </div>
@@ -113,7 +123,7 @@ export const GiftCardBuilder = () => {
         </div>
 
         <div className="rounded-2xl border border-border bg-card p-6">
-          <GiftCardPersonalize state={state} onChange={patch} />
+          <GiftCardPersonalize state={state} onChange={patch} phoneError={phoneError} />
         </div>
 
         <div>

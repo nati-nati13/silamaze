@@ -5,6 +5,7 @@ export type GiftCardBuilderState = {
   purpose: 'gift' | 'self';
   recipient: string;
   sender: string;
+  phone: string;
   usage: 'თბილისი' | 'საგარეჯო' | 'ორივე';
   message: string;
   themeId: string;

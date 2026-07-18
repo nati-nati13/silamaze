@@ -29,5 +29,7 @@ export const PUBLIC_NAV_ITEMS: PublicNavItem[] = [
   { type: 'link', href: '/produqcia', label: 'პროდუქცია' },
   { type: 'link', href: '/sachuqari-barati', label: 'სასაჩუქრე' },
   { type: 'link', href: '/galeria', label: 'გალერეა' },
+  { type: 'link', href: '/siaxleebi', label: 'სიახლეები' },
+  { type: 'link', href: '/pressa', label: 'პრესა' },
   { type: 'link', href: '/kontakti', label: 'კონტაქტი' },
 ];
