@@ -1,8 +1,4 @@
-import { Phone } from 'lucide-react';
-import Link from 'next/link';
-
-import { Button } from '@/shared/components/ui/button';
-import { PHONE_TEL } from '@/shared/const/contacts.const';
+import { CallbackForm } from '@/features/callback/components/callback-form';
 
 export const CtaBand = () => {
   return (
@@ -16,18 +12,7 @@ export const CtaBand = () => {
             დაგვიტოვე ნომერი — დაგირეკავთ და დაგეხმარებით სწორი კურსის ან
             პროცედურის არჩევაში.
           </p>
-          <div className="relative mt-8 flex justify-center">
-            <Button
-              size="lg"
-              asChild
-              className="bg-primary-foreground font-semibold text-primary hover:bg-primary-foreground/90"
-            >
-              <Link href={`tel:${PHONE_TEL}`}>
-                <Phone className="size-4" aria-hidden="true" />
-                დაგვირეკეთ
-              </Link>
-            </Button>
-          </div>
+          <CallbackForm />
         </div>
       </div>
     </section>
