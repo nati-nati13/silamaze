@@ -23,6 +23,7 @@ const INITIAL: GiftCardBuilderState = {
   recipient: '',
   sender: '',
   phone: '',
+  email: '',
   usage: 'ორივე',
   message: '',
   themeId: 'green',
@@ -40,9 +41,11 @@ export const GiftCardBuilder = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   const patch = (p: GiftCardPatch) => {
     if ('phone' in p) setPhoneError(null);
+    if ('email' in p) setEmailError(null);
     setState((s) => ({ ...s, ...p }));
   };
 
@@ -53,6 +56,11 @@ export const GiftCardBuilder = () => {
   const onOrder = async () => {
     if (state.phone.trim().length < 5) {
       setPhoneError('შეიყვანეთ ტელეფონის ნომერი');
+      return;
+    }
+    // builder cards are delivered digitally, so a valid email is required
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())) {
+      setEmailError('შეიყვანეთ სწორი ელ-ფოსტა');
       return;
     }
     setLoading(true);
@@ -66,6 +74,7 @@ export const GiftCardBuilder = () => {
         sender: state.sender,
         name: state.sender || state.recipient || 'სტუმარი',
         phone: state.phone,
+        email: state.email,
         message: state.message,
       });
       setSuccess(true);
@@ -86,7 +95,7 @@ export const GiftCardBuilder = () => {
         <p className="mt-2 text-sm text-muted-foreground">
           ჩვენი გუნდი მალე დაგიკავშირდებათ ბარათის გასაფორმებლად.
         </p>
-        <Button className="mt-6" variant="outline" onClick={() => { setState(INITIAL); setSuccess(false); setPhoneError(null); }}>
+        <Button className="mt-6" variant="outline" onClick={() => { setState(INITIAL); setSuccess(false); setPhoneError(null); setEmailError(null); }}>
           ახალი ბარათი
         </Button>
       </div>
@@ -123,7 +132,12 @@ export const GiftCardBuilder = () => {
         </div>
 
         <div className="rounded-2xl border border-border bg-card p-6">
-          <GiftCardPersonalize state={state} onChange={patch} phoneError={phoneError} />
+          <GiftCardPersonalize
+            state={state}
+            onChange={patch}
+            phoneError={phoneError}
+            emailError={emailError}
+          />
         </div>
 
         <div>

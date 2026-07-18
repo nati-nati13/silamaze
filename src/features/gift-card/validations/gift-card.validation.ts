@@ -17,6 +17,15 @@ export const PublicGiftCardSchema = z
     if (val.delivery === 'ბეჭდური' && (!val.address || val.address.trim().length < 5)) {
       ctx.addIssue({ code: 'custom', path: ['address'], message: 'მიუთითეთ მიწოდების მისამართი' });
     }
+    // digital cards are delivered by email, so email is required there;
+    // physical pickup keeps it optional
+    if (val.delivery === 'ელექტრონული' && (!val.email || val.email.trim() === '')) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['email'],
+        message: 'ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის',
+      });
+    }
   });
 
 export type PublicGiftCardType = z.infer<typeof PublicGiftCardSchema>;

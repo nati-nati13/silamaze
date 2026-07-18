@@ -26,9 +26,10 @@ type Props = {
   state: GiftCardBuilderState;
   onChange: (patch: GiftCardPatch) => void;
   phoneError?: string | null;
+  emailError?: string | null;
 };
 
-export const GiftCardPersonalize = ({ state, onChange, phoneError }: Props) => {
+export const GiftCardPersonalize = ({ state, onChange, phoneError, emailError }: Props) => {
   return (
     <div>
       <p className="eyebrow text-brand-academy">2. პერსონალიზაცია</p>
@@ -81,6 +82,22 @@ export const GiftCardPersonalize = ({ state, onChange, phoneError }: Props) => {
           />
           {phoneError && (
             <p className="mt-1.5 text-sm font-medium text-destructive">{phoneError}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-foreground">
+            ელ-ფოსტა (ციფრული ბარათის მისაღებად) *
+          </label>
+          <Input
+            className="mt-1.5"
+            type="email"
+            placeholder="მაგ: example@gmail.com"
+            value={state.email}
+            onChange={(e) => onChange({ email: e.target.value })}
+          />
+          {emailError && (
+            <p className="mt-1.5 text-sm font-medium text-destructive">{emailError}</p>
           )}
         </div>
 

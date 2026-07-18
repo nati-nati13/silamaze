@@ -26,6 +26,9 @@ export const ReservationSchema = z
       if (val.delivery === 'ბეჭდური' && (!val.address || val.address.trim().length < 5)) {
         ctx.addIssue({ code: 'custom', path: ['address'], message: 'მიუთითეთ მიწოდების მისამართი' });
       }
+      if (val.delivery === 'ელექტრონული' && (!val.email || val.email.trim() === '')) {
+        ctx.addIssue({ code: 'custom', path: ['email'], message: 'ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის' });
+      }
       return;
     }
     if (!val.location) {
