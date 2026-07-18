@@ -11,7 +11,6 @@ import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { OfferingsSection } from '@/features/marketing/components/offerings-section';
 import { ReservationSection } from '@/features/marketing/components/reservation-section';
 import { ServicesSection } from '@/features/marketing/components/services-section';
-import { TestimonialsSection } from '@/features/marketing/components/testimonials-section';
 import { Footer } from '@/shared/components/layout/footer';
 import { Reveal } from '@/shared/components/ui/reveal';
 
@@ -41,9 +40,6 @@ export const HomePage = () => {
         </Reveal>
         <Reveal>
           <AboutSection />
-        </Reveal>
-        <Reveal>
-          <TestimonialsSection />
         </Reveal>
         <Reveal>
           <ReservationSection />

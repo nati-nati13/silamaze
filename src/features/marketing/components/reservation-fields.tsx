@@ -133,7 +133,7 @@ export const ReservationFields = ({ control, type }: Props) => {
                 rows={3}
                 placeholder={
                   isGiftCard
-                    ? 'მაგ: გილოცავ დაბადების დღეს!'
+                    ? 'მაგ: მილოცვის ტექსტი ან კომენტარი...'
                     : 'მაგ: მაქვს მგრძნობიარე კანი, ან კითხვები პროცედურასთან დაკავშირებით...'
                 }
                 className={TEXTAREA_CLASS}
