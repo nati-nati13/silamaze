@@ -7,6 +7,7 @@ export const giftCardRepository = {
     amount: string;
     usage: string;
     delivery: string;
+    address?: string;
     name: string;
     phone: string;
     email?: string;

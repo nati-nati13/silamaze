@@ -65,6 +65,7 @@ export const ReservationForm = () => {
           amount: nominal?.amount ?? values.selection,
           usage: values.usage,
           delivery: values.delivery,
+          address: values.delivery === 'ბეჭდური' ? values.address : '',
           name: values.name,
           phone: values.phone,
           email: values.email,
@@ -110,6 +111,7 @@ export const ReservationForm = () => {
         message: '',
         usage: undefined,
         delivery: undefined,
+        address: '',
       });
     } catch {
       setError('შეცდომა. სცადეთ კვლავ.');

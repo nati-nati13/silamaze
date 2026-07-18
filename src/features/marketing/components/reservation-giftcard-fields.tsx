@@ -1,4 +1,4 @@
-import { type Control } from 'react-hook-form';
+import { type Control, useWatch } from 'react-hook-form';
 
 import { ReservationType } from '@/features/booking/validations/reservation.validation';
 import {
@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/components/ui/form';
+import { Input } from '@/shared/components/ui/input';
 
 const USAGE_OPTIONS = [
   { value: 'თბილისი', label: 'თბილისი' },
@@ -32,6 +33,8 @@ type Props = {
 };
 
 export const ReservationGiftCardFields = ({ control }: Props) => {
+  const delivery = useWatch({ control, name: 'delivery' });
+
   return (
     <>
       <FormField
@@ -86,6 +89,26 @@ export const ReservationGiftCardFields = ({ control }: Props) => {
           </FormItem>
         )}
       />
+
+      {delivery === 'ბეჭდური' && (
+        <FormField
+          control={control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>მიწოდების მისამართი *</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="მაგ: ქ. თბილისი, ვაჟა-ფშაველას გამზ. 8, ბ. 12"
+                  {...field}
+                  value={field.value ?? ''}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
     </>
   );
 };

@@ -6,6 +6,7 @@ export const ReservationSchema = z
     location: z.enum(['თბილისი', 'საგარეჯო']).optional(),
     usage: z.enum(['თბილისი', 'საგარეჯო', 'ორივე']).optional(),
     delivery: z.enum(['ელექტრონული', 'ბეჭდური']).optional(),
+    address: z.string().optional(),
     name: z.string().min(2, 'სახელი სავალდებულოა'),
     phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
     email: z.string().email('არასწორი ელ-ფოსტა').optional().or(z.literal('')),
@@ -21,6 +22,9 @@ export const ReservationSchema = z
       }
       if (!val.delivery) {
         ctx.addIssue({ code: 'custom', path: ['delivery'], message: 'აირჩიეთ მიწოდების მეთოდი' });
+      }
+      if (val.delivery === 'ბეჭდური' && (!val.address || val.address.trim().length < 5)) {
+        ctx.addIssue({ code: 'custom', path: ['address'], message: 'მიუთითეთ მიწოდების მისამართი' });
       }
       return;
     }

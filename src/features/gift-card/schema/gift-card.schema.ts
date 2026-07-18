@@ -14,6 +14,7 @@ const GiftCardOrderSchema = new Schema(
       enum: ['ელექტრონული', 'ბეჭდური'],
       required: true,
     },
+    address: { type: String, default: '' },
     name: { type: String, required: true, default: '' },
     phone: { type: String, required: true, default: '' },
     email: { type: String, default: '' },
