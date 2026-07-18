@@ -13,11 +13,21 @@ type CreateGiftCardData = {
   usage: string;
   delivery: string;
   address?: string;
-  recipient?: string;
-  sender?: string;
+  // structured buyer + recipient/display
+  buyerFirstName: string;
+  buyerLastName: string;
+  buyerPhone: string;
+  buyerEmail: string;
+  recipientName: string;
+  recipientPhone: string;
+  recipientEmail: string;
+  displayFrom: string;
+  // legacy dual-write
+  recipient: string;
+  sender: string;
   name: string;
   phone: string;
-  email?: string;
+  email: string;
   message?: string;
   status: string;
   originalAmount?: number | null;

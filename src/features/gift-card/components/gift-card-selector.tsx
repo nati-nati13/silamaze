@@ -20,7 +20,7 @@ const MODE_TABS: { value: Mode; label: string }[] = [
 export const GiftCardSelector = ({ mode, selectionId, onModeChange, onSelect }: Props) => {
   return (
     <div>
-      <p className="eyebrow text-brand-academy">1. აირჩიე თანხა ან პროცედურა</p>
+      <p className="eyebrow text-brand-academy">3. ბარათის არჩევა</p>
 
       <div className="mt-4 grid grid-cols-2 gap-2">
         {MODE_TABS.map((tab) => (

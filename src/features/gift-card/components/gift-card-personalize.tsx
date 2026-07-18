@@ -25,11 +25,9 @@ const USAGE_OPTIONS = [
 type Props = {
   state: GiftCardBuilderState;
   onChange: (patch: GiftCardPatch) => void;
-  phoneError?: string | null;
-  emailError?: string | null;
 };
 
-export const GiftCardPersonalize = ({ state, onChange, phoneError, emailError }: Props) => {
+export const GiftCardPersonalize = ({ state, onChange }: Props) => {
   return (
     <div>
       <p className="eyebrow text-brand-academy">2. პერსონალიზაცია</p>
@@ -53,52 +51,46 @@ export const GiftCardPersonalize = ({ state, onChange, phoneError, emailError }:
 
       <div className="mt-4 space-y-4">
         <div>
-          <label className="text-sm font-medium text-foreground">ვისთვის (სახელი)</label>
+          <label className="text-sm font-medium text-foreground">ვისთვის (მიმღების სახელი)</label>
           <Input
             className="mt-1.5"
             placeholder="მაგ: მარიამ ბერიძე"
-            value={state.recipient}
-            onChange={(e) => onChange({ recipient: e.target.value })}
-          />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-foreground">ვისგან (სახელი)</label>
-          <Input
-            className="mt-1.5"
-            placeholder="მაგ: ანა და გიორგი"
-            value={state.sender}
-            onChange={(e) => onChange({ sender: e.target.value })}
+            value={state.recipientName}
+            onChange={(e) => onChange({ recipientName: e.target.value })}
           />
         </div>
 
         <div>
-          <label className="text-sm font-medium text-foreground">შემძენის ტელეფონი *</label>
+          <label className="text-sm font-medium text-foreground">ვისგან (ბარათზე ნაჩვენები ტექსტი)</label>
           <Input
             className="mt-1.5"
-            type="tel"
-            placeholder="მაგ: +995 599 12 34 56"
-            value={state.phone}
-            onChange={(e) => onChange({ phone: e.target.value })}
+            placeholder="მაგ: სიყვარულით, შენი მეგობრებისგან"
+            value={state.displayFrom}
+            onChange={(e) => onChange({ displayFrom: e.target.value })}
           />
-          {phoneError && (
-            <p className="mt-1.5 text-sm font-medium text-destructive">{phoneError}</p>
-          )}
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-foreground">
-            ელ-ფოსტა (ციფრული ბარათის მისაღებად) *
-          </label>
-          <Input
-            className="mt-1.5"
-            type="email"
-            placeholder="მაგ: example@gmail.com"
-            value={state.email}
-            onChange={(e) => onChange({ email: e.target.value })}
-          />
-          {emailError && (
-            <p className="mt-1.5 text-sm font-medium text-destructive">{emailError}</p>
-          )}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label className="text-sm font-medium text-foreground">მიმღების ტელეფონი</label>
+            <Input
+              className="mt-1.5"
+              type="tel"
+              placeholder="არასავალდებულო"
+              value={state.recipientPhone}
+              onChange={(e) => onChange({ recipientPhone: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-foreground">მიმღების ელ-ფოსტა</label>
+            <Input
+              className="mt-1.5"
+              type="email"
+              placeholder="არასავალდებულო"
+              value={state.recipientEmail}
+              onChange={(e) => onChange({ recipientEmail: e.target.value })}
+            />
+          </div>
         </div>
 
         <div>
@@ -132,12 +124,7 @@ export const GiftCardPersonalize = ({ state, onChange, phoneError, emailError }:
           />
           <div className="mt-2 flex flex-wrap gap-2">
             {GIFT_CARD_QUICK_MESSAGES.map((m) => (
-              <button
-                key={m}
-                type="button"
-                onClick={() => onChange({ message: m })}
-                className={CHIP_CLASS}
-              >
+              <button key={m} type="button" onClick={() => onChange({ message: m })} className={CHIP_CLASS}>
                 {m}
               </button>
             ))}

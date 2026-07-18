@@ -16,30 +16,70 @@ function parseMonetaryAmount(amount: string): number | null {
   return match ? Number(match[1]) : null;
 }
 
+// resolve authoritative buyer identity from structured fields, falling back to
+// the legacy single `name`/`phone`/`email` (reservation-form flow)
+function resolveBuyer(input: PublicGiftCardType) {
+  let firstName = (input.buyerFirstName ?? '').trim();
+  let lastName = (input.buyerLastName ?? '').trim();
+
+  if (!firstName && !lastName && input.name) {
+    const parts = input.name.trim().split(/\s+/);
+    firstName = parts[0] ?? '';
+    lastName = parts.slice(1).join(' ');
+  }
+
+  const fullName = `${firstName} ${lastName}`.trim() || (input.name ?? '').trim() || 'სტუმარი';
+  const phone = (input.buyerPhone || input.phone || '').trim();
+  const email = (input.buyerEmail || input.email || '').trim();
+
+  return { firstName, lastName, fullName, phone, email };
+}
+
 export async function createPublicGiftCardService(
   input: PublicGiftCardType
 ): Promise<ServiceResult<GiftCardCreateResult>> {
   const monetaryValue = parseMonetaryAmount(input.amount);
+  const buyer = resolveBuyer(input);
+  const resolvedRecipient = (input.recipientName ?? '').trim();
+  const displayFrom = (input.displayFrom ?? '').trim();
 
   // authoritative, server-set values only — client cannot influence these
   const created = await giftCardRepository.create({
     userId: '',
-    ...input,
+    amount: input.amount,
+    usage: input.usage,
+    delivery: input.delivery,
+    address: input.address ?? '',
+    // structured buyer + recipient/display
+    buyerFirstName: buyer.firstName,
+    buyerLastName: buyer.lastName,
+    buyerPhone: buyer.phone,
+    buyerEmail: buyer.email,
+    recipientName: resolvedRecipient,
+    recipientPhone: (input.recipientPhone ?? '').trim(),
+    recipientEmail: (input.recipientEmail ?? '').trim(),
+    displayFrom,
+    // legacy dual-write for backward compatibility
+    recipient: resolvedRecipient,
+    sender: displayFrom,
+    name: buyer.fullName,
+    phone: buyer.phone,
+    email: buyer.email,
+    message: input.message ?? '',
     status: 'pending',
     originalAmount: monetaryValue,
     remainingBalance: monetaryValue,
     currency: monetaryValue !== null ? 'GEL' : null,
   });
 
-  // email is persisted for the admin follow-up and future automated
-  // customer email delivery of the digital card
+  // full buyer name/phone/email surfaced for admin follow-up, payments and refunds
   console.warn('[ADMIN] ახალი სასაჩუქრე ბარათის შეკვეთა', {
     code: created.code,
     status: created.status,
-    name: input.name,
-    phone: input.phone,
-    email: input.email ?? '',
-    recipient: input.recipient ?? '',
+    buyerName: buyer.fullName,
+    buyerPhone: buyer.phone,
+    buyerEmail: buyer.email,
+    recipient: resolvedRecipient,
     delivery: input.delivery,
     location: input.usage,
     amount: input.amount,

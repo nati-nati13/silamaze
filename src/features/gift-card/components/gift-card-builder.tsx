@@ -2,10 +2,15 @@
 
 import { useState } from 'react';
 
+import { GiftCardBuyerFields } from '@/features/gift-card/components/gift-card-buyer-fields';
 import { GiftCardPersonalize } from '@/features/gift-card/components/gift-card-personalize';
 import { GiftCardPreview } from '@/features/gift-card/components/gift-card-preview';
 import { GiftCardSelector } from '@/features/gift-card/components/gift-card-selector';
-import { GiftCardBuilderState, GiftCardPatch } from '@/features/gift-card/types/gift-card.types';
+import {
+  BuyerFieldErrors,
+  GiftCardBuilderState,
+  GiftCardPatch,
+} from '@/features/gift-card/types/gift-card.types';
 import { Button } from '@/shared/components/ui/button';
 import { CARD_THEMES, GIFT_CARD_NOMINALS } from '@/shared/const/gift-card.const';
 import { http } from '@/shared/lib/http';
@@ -20,10 +25,14 @@ const INITIAL: GiftCardBuilderState = {
   mode: 'amount',
   selectionId: 'gc-silver',
   purpose: 'gift',
-  recipient: '',
-  sender: '',
-  phone: '',
-  email: '',
+  buyerFirstName: '',
+  buyerLastName: '',
+  buyerPhone: '',
+  buyerEmail: '',
+  recipientName: '',
+  recipientPhone: '',
+  recipientEmail: '',
+  displayFrom: '',
   usage: 'ორივე',
   message: '',
   themeId: 'green',
@@ -35,18 +44,24 @@ const USAGE_LABEL: Record<GiftCardBuilderState['usage'], string> = {
   ორივე: 'ორივე ფილიალი',
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const BUYER_KEYS: (keyof GiftCardBuilderState)[] = [
+  'buyerFirstName',
+  'buyerLastName',
+  'buyerPhone',
+  'buyerEmail',
+];
+
 export const GiftCardBuilder = () => {
   const [state, setState] = useState<GiftCardBuilderState>(INITIAL);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [buyerErrors, setBuyerErrors] = useState<BuyerFieldErrors>({});
   const [orderCode, setOrderCode] = useState<string | null>(null);
 
   const patch = (p: GiftCardPatch) => {
-    if ('phone' in p) setPhoneError(null);
-    if ('email' in p) setEmailError(null);
+    if (BUYER_KEYS.some((k) => k in p)) setBuyerErrors({});
     setState((s) => ({ ...s, ...p }));
   };
 
@@ -55,15 +70,17 @@ export const GiftCardBuilder = () => {
   const gradient = CARD_THEMES.find((t) => t.id === state.themeId)?.gradient ?? CARD_THEMES[0].gradient;
 
   const onOrder = async () => {
-    if (state.phone.trim().length < 5) {
-      setPhoneError('შეიყვანეთ ტელეფონის ნომერი');
-      return;
-    }
+    const errs: BuyerFieldErrors = {};
+    if (state.buyerFirstName.trim().length < 2) errs.firstName = 'შეიყვანეთ სახელი';
+    if (state.buyerLastName.trim().length < 2) errs.lastName = 'შეიყვანეთ გვარი';
+    if (state.buyerPhone.trim().length < 5) errs.phone = 'შეიყვანეთ ტელეფონი';
     // builder cards are delivered digitally, so a valid email is required
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())) {
-      setEmailError('შეიყვანეთ სწორი ელ-ფოსტა');
+    if (!EMAIL_RE.test(state.buyerEmail.trim())) errs.email = 'შეიყვანეთ სწორი ელ-ფოსტა';
+    if (Object.keys(errs).length > 0) {
+      setBuyerErrors(errs);
       return;
     }
+
     setLoading(true);
     setError(null);
     try {
@@ -71,11 +88,14 @@ export const GiftCardBuilder = () => {
         amount: amountLabel || 'შეთანხმებით',
         usage: state.usage,
         delivery: 'ელექტრონული',
-        recipient: state.recipient,
-        sender: state.sender,
-        name: state.sender || state.recipient || 'სტუმარი',
-        phone: state.phone,
-        email: state.email,
+        buyerFirstName: state.buyerFirstName,
+        buyerLastName: state.buyerLastName,
+        buyerPhone: state.buyerPhone,
+        buyerEmail: state.buyerEmail,
+        recipientName: state.recipientName,
+        recipientPhone: state.recipientPhone,
+        recipientEmail: state.recipientEmail,
+        displayFrom: state.displayFrom,
         message: state.message,
       });
       setOrderCode(res?.giftCardCode ?? null);
@@ -99,9 +119,7 @@ export const GiftCardBuilder = () => {
         </p>
         {orderCode && (
           <div className="mt-6 rounded-xl border border-border bg-muted p-4">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">
-              ბარათის კოდი
-            </p>
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">ბარათის კოდი</p>
             <p className="mt-1 font-mono text-lg font-bold tracking-wider text-foreground">
               {orderCode}
             </p>
@@ -116,8 +134,7 @@ export const GiftCardBuilder = () => {
           onClick={() => {
             setState(INITIAL);
             setSuccess(false);
-            setPhoneError(null);
-            setEmailError(null);
+            setBuyerErrors({});
             setOrderCode(null);
           }}
         >
@@ -147,6 +164,15 @@ export const GiftCardBuilder = () => {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="flex flex-col gap-8">
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <GiftCardBuyerFields state={state} onChange={patch} errors={buyerErrors} />
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <GiftCardPersonalize state={state} onChange={patch} />
+          </div>
+        </div>
+
         <div className="rounded-2xl border border-border bg-card p-6">
           <GiftCardSelector
             mode={state.mode}
@@ -156,21 +182,12 @@ export const GiftCardBuilder = () => {
           />
         </div>
 
-        <div className="rounded-2xl border border-border bg-card p-6">
-          <GiftCardPersonalize
-            state={state}
-            onChange={patch}
-            phoneError={phoneError}
-            emailError={emailError}
-          />
-        </div>
-
         <div>
-          <p className="eyebrow text-brand-academy">3. ბარათის ესკიზი</p>
+          <p className="eyebrow text-brand-academy">ბარათის ესკიზი</p>
           <div className="mt-4">
             <GiftCardPreview
               amountLabel={amountLabel}
-              recipient={state.recipient}
+              recipient={state.recipientName}
               usageLabel={USAGE_LABEL[state.usage]}
               gradient={gradient}
               loading={loading}

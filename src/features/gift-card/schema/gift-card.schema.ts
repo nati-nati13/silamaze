@@ -19,6 +19,17 @@ const GiftCardOrderSchema = new Schema(
       required: true,
     },
     address: { type: String, default: '' },
+    // structured buyer / payer identity (authoritative)
+    buyerFirstName: { type: String, default: '' },
+    buyerLastName: { type: String, default: '' },
+    buyerPhone: { type: String, default: '' },
+    buyerEmail: { type: String, default: '' },
+    // recipient + gift-card display text
+    recipientName: { type: String, default: '' },
+    recipientPhone: { type: String, default: '' },
+    recipientEmail: { type: String, default: '' },
+    displayFrom: { type: String, default: '' },
+    // legacy fields kept readable + dual-written for backward compatibility
     recipient: { type: String, default: '' },
     sender: { type: String, default: '' },
     name: { type: String, required: true, default: '' },
