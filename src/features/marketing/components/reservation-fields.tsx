@@ -11,6 +11,7 @@ import {
 import { Input } from '@/shared/components/ui/input';
 import { NativeSelect } from '@/shared/components/ui/select';
 import { AVAILABLE_TIMES, BOOKING_SERVICES } from '@/shared/const/booking.const';
+import { LOCATIONS } from '@/shared/const/contacts.const';
 import { COURSES } from '@/shared/const/courses.const';
 
 const TEXTAREA_CLASS =
@@ -26,42 +27,13 @@ type Props = {
 export const ReservationFields = ({ control, isCourse }: Props) => {
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <FormField
-          control={control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>თქვენი სახელი *</FormLabel>
-              <FormControl>
-                <Input placeholder="მაგ: მარიამ ბერიძე" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>ტელეფონის ნომერი *</FormLabel>
-              <FormControl>
-                <Input placeholder="მაგ: 599 00 00 00" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
       <FormField
         control={control}
         name="selection"
         render={({ field }) => (
           <FormItem>
             <FormLabel>
-              {isCourse ? 'სასურველი კურსი *' : 'სასურველი ესთეტიკური სერვისი *'}
+              {isCourse ? 'აირჩიე სასწავლო კურსი *' : 'აირჩიე ესთეტიკური სერვისი *'}
             </FormLabel>
             <FormControl>
               <NativeSelect {...field}>
@@ -69,7 +41,7 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
                 {isCourse
                   ? COURSES.map((c) => (
                     <option key={c.id} value={c.id}>
-                      {c.title}
+                      {c.price ? `${c.title} (${c.price})` : c.title}
                     </option>
                   ))
                   : BOOKING_SERVICES.map((s) => (
@@ -84,13 +56,89 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
         )}
       />
 
+      <FormField
+        control={control}
+        name="location"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>აირჩიე ფილიალი (მდებარეობა) *</FormLabel>
+            <FormControl>
+              <div className="grid grid-cols-2 gap-3">
+                {LOCATIONS.map((loc) => (
+                  <button
+                    key={loc.city}
+                    type="button"
+                    onClick={() => field.onChange(loc.city)}
+                    className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                      field.value === loc.city
+                        ? 'border-primary bg-primary/10'
+                        : 'border-border hover:border-brand-green/50'
+                    }`}
+                  >
+                    <span className="block text-sm font-semibold text-foreground">
+                      დერმაკო {loc.city}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-muted-foreground">
+                      {loc.address}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>სახელი და გვარი *</FormLabel>
+            <FormControl>
+              <Input placeholder="მაგ: ნინო ბერიძე" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="phone"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>ტელეფონის ნომერი *</FormLabel>
+            <FormControl>
+              <Input placeholder="მაგ: +995 599 12 34 56" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>ელ-ფოსტა (შეტყობინებების მისაღებად)</FormLabel>
+            <FormControl>
+              <Input type="email" placeholder="მაგ: example@gmail.com" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <FormField
           control={control}
           name="date"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ვიზიტის თარიღი *</FormLabel>
+              <FormLabel>თარიღი *</FormLabel>
               <FormControl>
                 <Input type="date" {...field} />
               </FormControl>
@@ -103,7 +151,7 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
           name="time"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>სასურველი საათი *</FormLabel>
+              <FormLabel>სასურველი დრო *</FormLabel>
               <FormControl>
                 <NativeSelect {...field}>
                   <option value="">— აირჩიეთ დრო —</option>
@@ -125,12 +173,12 @@ export const ReservationFields = ({ control, isCourse }: Props) => {
         name="message"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>დამატებითი შეტყობინება</FormLabel>
+            <FormLabel>დამატებითი კომენტარი ან დეტალები</FormLabel>
             <FormControl>
               <textarea
                 {...field}
                 rows={3}
-                placeholder="მაგ: მინდა უფასო კანის კომპიუტერული დიაგნოსტიკის ჩატარება..."
+                placeholder="მაგ: მაქვს მგრძნობიარე კანი, ან კითხვები პროცედურასთან დაკავშირებით..."
                 className={TEXTAREA_CLASS}
               />
             </FormControl>

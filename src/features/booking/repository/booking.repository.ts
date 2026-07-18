@@ -15,6 +15,7 @@ export const bookingRepository = {
     time: string;
     name: string;
     phone: string;
+    email?: string;
     message?: string;
   }): Promise<string> {
     await mongo.connect();

@@ -14,7 +14,7 @@ export async function createBookingService(
 export async function createPublicBookingService(
   input: PublicBookingType
 ): Promise<ServiceResult<{ message: string }>> {
-  await bookingRepository.create({ userId: '', location: 'თბილისი', ...input });
+  await bookingRepository.create({ userId: '', ...input });
   return { data: { message: 'Booking created' }, status: 201 };
 }
 

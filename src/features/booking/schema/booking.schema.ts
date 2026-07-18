@@ -13,6 +13,7 @@ const BookingSchema = new Schema(
     time: { type: String, required: true },
     name: { type: String, required: true, default: '' },
     phone: { type: String, required: true, default: '' },
+    email: { type: String, default: '' },
     message: { type: String, default: '' },
     status: {
       type: String,

@@ -11,7 +11,8 @@ export async function POST(req: NextRequest) {
 
     const { data, status } = await createPublicBookingService(validated.data);
     return NextResponse.json(data, { status });
-  } catch {
+  } catch (error) {
+    console.error('POST /api/bookings/public failed', error);
     return NextResponse.json({ error: 'INTERNAL_ERROR' }, { status: 500 });
   }
 }

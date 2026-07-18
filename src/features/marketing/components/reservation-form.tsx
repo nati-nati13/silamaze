@@ -12,6 +12,7 @@ import {
 import { ReservationFields } from '@/features/marketing/components/reservation-fields';
 import { Button } from '@/shared/components/ui/button';
 import { Form } from '@/shared/components/ui/form';
+import { RESERVATION_DISCLAIMER } from '@/shared/const/booking.const';
 import { COURSES } from '@/shared/const/courses.const';
 import { http } from '@/shared/lib/http';
 
@@ -30,8 +31,10 @@ export const ReservationForm = () => {
     resolver: zodResolver(ReservationSchema),
     defaultValues: {
       type: 'service',
+      location: 'თბილისი',
       name: '',
       phone: '',
+      email: '',
       selection: '',
       date: '',
       time: '',
@@ -59,10 +62,12 @@ export const ReservationForm = () => {
         // anonymous lead — staff confirms by phone
         await http.post('/bookings/public', {
           service: serviceName,
+          location: values.location,
           date: values.date,
           time: values.time,
           name: values.name,
           phone: values.phone,
+          email: values.email,
           message: values.message,
         });
       } else if (values.type === 'course') {
@@ -73,7 +78,7 @@ export const ReservationForm = () => {
       } else {
         await http.post('/bookings', {
           service: serviceName,
-          location: 'თბილისი',
+          location: values.location,
           date: values.date,
           time: values.time,
           name: values.name,
@@ -82,7 +87,7 @@ export const ReservationForm = () => {
         });
       }
       setSuccess(true);
-      form.reset({ ...form.getValues(), name: '', phone: '', selection: '', date: '', time: '', message: '' });
+      form.reset({ ...form.getValues(), name: '', phone: '', email: '', selection: '', date: '', time: '', message: '' });
     } catch {
       setError('შეცდომა. სცადეთ კვლავ.');
     } finally {
@@ -138,8 +143,12 @@ export const ReservationForm = () => {
           {error && <p className="text-sm font-medium text-destructive">{error}</p>}
 
           <Button type="submit" className="w-full font-semibold" size="lg" disabled={loading}>
-            {loading ? 'იგზავნება...' : 'გაგზავნა'}
+            {loading ? 'იგზავნება...' : 'დასტური და გაგზავნა'}
           </Button>
+
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            {RESERVATION_DISCLAIMER}
+          </p>
         </form>
       </Form>
     </div>

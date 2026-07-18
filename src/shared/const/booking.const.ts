@@ -8,6 +8,10 @@ export const BOOKING_SERVICES = [
 
 export const BOOKING_LOCATIONS = ['თბილისი', 'საგარეჯო'] as const;
 
+export const RESERVATION_DISCLAIMER =
+  '* დაჯავშნის გაგზავნის შემდეგ, ჩვენი კოლეგა უმოკლეს დროში დაგიკავშირდებათ მითითებულ ' +
+  'ნომერზე დეტალებისა და ზუსტი დროის დასაზუსტებლად.';
+
 export type BookingLocation = (typeof BOOKING_LOCATIONS)[number];
 
 export const AVAILABLE_TIMES = [
