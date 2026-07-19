@@ -1,4 +1,4 @@
-import { type Control } from 'react-hook-form';
+import { type Control, useWatch } from 'react-hook-form';
 
 import { ReservationType } from '@/features/booking/validations/reservation.validation';
 import { ReservationGiftCardFields } from '@/features/marketing/components/reservation-giftcard-fields';
@@ -34,6 +34,8 @@ type Props = {
 
 export const ReservationFields = ({ control, type }: Props) => {
   const isGiftCard = type === 'giftcard';
+  const selection = useWatch({ control, name: 'selection' });
+  const isCustomAmount = isGiftCard && selection === 'custom';
 
   return (
     <>
@@ -46,12 +48,16 @@ export const ReservationFields = ({ control, type }: Props) => {
             <FormControl>
               <NativeSelect {...field}>
                 <option value="">— აირჩიეთ სია ასარჩევად —</option>
-                {type === 'giftcard' &&
-                  GIFT_CARD_NOMINALS.map((n) => (
-                    <option key={n.id} value={n.id}>
-                      {n.amount} — {n.description}
-                    </option>
-                  ))}
+                {type === 'giftcard' && (
+                  <>
+                    {GIFT_CARD_NOMINALS.map((n) => (
+                      <option key={n.id} value={n.id}>
+                        {n.amount} — {n.description}
+                      </option>
+                    ))}
+                    <option value="custom">სხვა თანხა (ჩაწერე)</option>
+                  </>
+                )}
                 {type === 'course' &&
                   COURSES.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -70,6 +76,29 @@ export const ReservationFields = ({ control, type }: Props) => {
           </FormItem>
         )}
       />
+
+      {isCustomAmount && (
+        <FormField
+          control={control}
+          name="customAmount"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>ჩაწერე თანხა (₾) *</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min={1}
+                  inputMode="numeric"
+                  placeholder="მაგ: 750"
+                  {...field}
+                  value={field.value ?? ''}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
 
       {isGiftCard ? (
         <ReservationGiftCardFields control={control} />

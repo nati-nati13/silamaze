@@ -11,12 +11,19 @@ export const ReservationSchema = z
     phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
     email: z.string().email('არასწორი ელ-ფოსტა').optional().or(z.literal('')),
     selection: z.string().min(1, 'გთხოვთ აირჩიოთ'),
+    customAmount: z.string().optional(),
     date: z.string().optional(),
     time: z.string().optional(),
     message: z.string().optional(),
   })
   .superRefine((val, ctx) => {
     if (val.type === 'giftcard') {
+      if (val.selection === 'custom') {
+        const value = Number((val.customAmount ?? '').replace(/[^\d.]/g, ''));
+        if (!val.customAmount || !(value > 0)) {
+          ctx.addIssue({ code: 'custom', path: ['customAmount'], message: 'ჩაწერეთ თანხა' });
+        }
+      }
       if (!val.usage) {
         ctx.addIssue({ code: 'custom', path: ['usage'], message: 'აირჩიეთ გამოყენების ადგილი' });
       }

@@ -39,6 +39,7 @@ export const ReservationForm = () => {
       phone: '',
       email: '',
       selection: '',
+      customAmount: '',
       date: '',
       time: '',
       message: '',
@@ -62,8 +63,12 @@ export const ReservationForm = () => {
     try {
       if (values.type === 'giftcard') {
         const nominal = GIFT_CARD_NOMINALS.find((n) => n.id === values.selection);
+        const giftCardAmount =
+          values.selection === 'custom'
+            ? `${(values.customAmount ?? '').trim()} ₾`
+            : nominal?.amount ?? values.selection;
         const res = await http.post<{ giftCardCode: string }>('/gift-cards/public', {
-          amount: nominal?.amount ?? values.selection,
+          amount: giftCardAmount,
           usage: values.usage,
           delivery: values.delivery,
           address: values.delivery === 'ბეჭდური' ? values.address : '',
@@ -108,6 +113,7 @@ export const ReservationForm = () => {
         phone: '',
         email: '',
         selection: '',
+        customAmount: '',
         date: '',
         time: '',
         message: '',
