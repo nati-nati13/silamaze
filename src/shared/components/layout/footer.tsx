@@ -3,13 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { APP_NAME } from '@/shared/const/app.const';
-import {
-  EMAIL,
-  FACEBOOK_URL,
-  LOCATIONS,
-  PHONE_NUMBER,
-  PHONE_TEL,
-} from '@/shared/const/contacts.const';
+import { EMAIL, FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
 import { COURSES } from '@/shared/const/courses.const';
 import { SERVICES } from '@/shared/const/services.const';
 
@@ -84,15 +78,7 @@ export const Footer = () => {
             <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/60">
               კონტაქტი
             </h4>
-            <ul className="mt-4 flex flex-col gap-3 text-sm">
-              <li>
-                <Link
-                  href={`tel:${PHONE_TEL}`}
-                  className="text-primary-foreground/70 transition-colors hover:text-brand-academy"
-                >
-                  {PHONE_NUMBER}
-                </Link>
-              </li>
+            <ul className="mt-4 flex flex-col gap-4 text-sm">
               <li>
                 <Link
                   href={`mailto:${EMAIL}`}
@@ -102,8 +88,15 @@ export const Footer = () => {
                 </Link>
               </li>
               {LOCATIONS.map((loc) => (
-                <li key={loc.city} className="text-primary-foreground/50">
-                  {loc.address}, {loc.city}
+                <li key={loc.city} className="flex flex-col gap-1">
+                  <span className="font-semibold text-primary-foreground/80">{loc.city}</span>
+                  <Link
+                    href={`tel:${loc.phone.replace(/\s/g, '')}`}
+                    className="text-primary-foreground/70 transition-colors hover:text-brand-academy"
+                  >
+                    {loc.phone}
+                  </Link>
+                  <span className="text-primary-foreground/50">{loc.address}</span>
                 </li>
               ))}
             </ul>
