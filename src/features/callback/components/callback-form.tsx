@@ -22,7 +22,7 @@ import {
 import { Input } from '@/shared/components/ui/input';
 import { NativeSelect } from '@/shared/components/ui/select';
 import { CALLBACK_INTEREST_TYPES } from '@/shared/const/callback.const';
-import { PHONE_NUMBER, PHONE_TEL } from '@/shared/const/contacts.const';
+import { LOCATIONS } from '@/shared/const/contacts.const';
 import { http } from '@/shared/lib/http';
 
 const TEXTAREA_CLASS =
@@ -30,11 +30,14 @@ const TEXTAREA_CLASS =
   'transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 ' +
   'focus-visible:ring-ring';
 
+const CONTACT_PHONE = LOCATIONS[0].phone;
+const CONTACT_TEL = CONTACT_PHONE.replace(/\s/g, '');
+
 const DirectPhone = () => (
   <p className="mt-5 text-sm text-primary-foreground/80">
     ან დაგვიკავშირდით:{' '}
-    <Link href={`tel:${PHONE_TEL}`} className="font-semibold text-primary-foreground underline">
-      {PHONE_NUMBER}
+    <Link href={`tel:${CONTACT_TEL}`} className="font-semibold text-primary-foreground underline">
+      {CONTACT_PHONE}
     </Link>
   </p>
 );
@@ -79,7 +82,7 @@ export const CallbackForm = () => {
           className="bg-primary-foreground font-semibold text-primary hover:bg-primary-foreground/90"
         >
           <Phone className="size-4" aria-hidden="true" />
-          დაგვიკავშირდი
+          დაგვირეკეთ
         </Button>
         <DirectPhone />
       </div>
@@ -196,8 +199,8 @@ export const CallbackForm = () => {
 
       <p className="mt-5 text-center text-sm text-muted-foreground">
         ან დაგვიკავშირდით:{' '}
-        <Link href={`tel:${PHONE_TEL}`} className="font-semibold text-foreground underline">
-          {PHONE_NUMBER}
+        <Link href={`tel:${CONTACT_TEL}`} className="font-semibold text-foreground underline">
+          {CONTACT_PHONE}
         </Link>
       </p>
     </div>
