@@ -11,11 +11,6 @@ const CHIP_CLASS =
   'rounded-full border border-border px-3 py-1 text-xs text-muted-foreground transition-colors ' +
   'hover:border-brand-green/50 hover:text-foreground';
 
-const PURPOSE_TABS = [
-  { value: 'gift' as const, label: 'საჩუქრად' },
-  { value: 'self' as const, label: 'ჩემი დაჯავშნა' },
-];
-
 const USAGE_OPTIONS = [
   { value: 'თბილისი' as const, label: 'თბილისი' },
   { value: 'საგარეჯო' as const, label: 'საგარეჯო' },
@@ -30,67 +25,53 @@ type Props = {
 export const GiftCardPersonalize = ({ state, onChange }: Props) => {
   return (
     <div>
-      <p className="eyebrow text-brand-academy">2. პერსონალიზაცია</p>
-
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        {PURPOSE_TABS.map((tab) => (
-          <button
-            key={tab.value}
-            type="button"
-            onClick={() => onChange({ purpose: tab.value })}
-            className={`rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${
-              state.purpose === tab.value
-                ? 'border-primary bg-primary text-primary-foreground'
-                : 'border-border bg-card text-foreground hover:border-brand-green/50'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <p className="eyebrow text-brand-academy">3. პერსონალიზაცია</p>
 
       <div className="mt-4 space-y-4">
         <div>
-          <label className="text-sm font-medium text-foreground">ვისთვის (მიმღების სახელი)</label>
-          <Input
-            className="mt-1.5"
-            placeholder="მაგ: მარიამ ბერიძე"
-            value={state.recipientName}
-            onChange={(e) => onChange({ recipientName: e.target.value })}
+          <label className="text-sm font-medium text-foreground">პირადი შეტყობინება</label>
+          <textarea
+            className={`mt-1.5 ${TEXTAREA_CLASS}`}
+            rows={2}
+            placeholder="მაგ: მილოცვის ტექსტი ან კომენტარი..."
+            value={state.message}
+            onChange={(e) => onChange({ message: e.target.value })}
           />
+          <div className="mt-2 flex flex-wrap gap-2">
+            {GIFT_CARD_QUICK_MESSAGES.map((m) => (
+              <button key={m} type="button" onClick={() => onChange({ message: m })} className={CHIP_CLASS}>
+                {m}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-foreground">ვისგან (ბარათზე ნაჩვენები ტექსტი)</label>
+          <label className="text-sm font-medium text-foreground">ვისგან გამოჩნდეს</label>
           <Input
             className="mt-1.5"
-            placeholder="მაგ: სიყვარულით, შენი მეგობრებისგან"
+            placeholder="მაგ: სიყვარულით, შენი მეგობრისგან"
             value={state.displayFrom}
+            disabled={state.isAnonymous}
             onChange={(e) => onChange({ displayFrom: e.target.value })}
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <label className="text-sm font-medium text-foreground">მიმღების ტელეფონი</label>
-            <Input
-              className="mt-1.5"
-              type="tel"
-              placeholder="არასავალდებულო"
-              value={state.recipientPhone}
-              onChange={(e) => onChange({ recipientPhone: e.target.value })}
+        <div>
+          <label className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              checked={state.isAnonymous}
+              onChange={(e) => onChange({ isAnonymous: e.target.checked, displayFrom: '' })}
+              className="mt-0.5 size-4 shrink-0 rounded border-input accent-primary"
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-foreground">მიმღების ელ-ფოსტა</label>
-            <Input
-              className="mt-1.5"
-              type="email"
-              placeholder="არასავალდებულო"
-              value={state.recipientEmail}
-              onChange={(e) => onChange({ recipientEmail: e.target.value })}
-            />
-          </div>
+            <span className="text-sm text-foreground">გამგზავნის ვინაობა არ გამოჩნდეს</span>
+          </label>
+          {state.isAnonymous && (
+            <p className="mt-1.5 text-xs text-muted-foreground">
+              მიმღები ვერ დაინახავს თქვენს სახელს, ტელეფონს ან ელ-ფოსტას.
+            </p>
+          )}
         </div>
 
         <div>
@@ -108,24 +89,6 @@ export const GiftCardPersonalize = ({ state, onChange }: Props) => {
                 }`}
               >
                 {opt.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="text-sm font-medium text-foreground">მილოცვის ტექსტი</label>
-          <textarea
-            className={`mt-1.5 ${TEXTAREA_CLASS}`}
-            rows={2}
-            placeholder="მაგ: მილოცვის ტექსტი ან კომენტარი..."
-            value={state.message}
-            onChange={(e) => onChange({ message: e.target.value })}
-          />
-          <div className="mt-2 flex flex-wrap gap-2">
-            {GIFT_CARD_QUICK_MESSAGES.map((m) => (
-              <button key={m} type="button" onClick={() => onChange({ message: m })} className={CHIP_CLASS}>
-                {m}
               </button>
             ))}
           </div>

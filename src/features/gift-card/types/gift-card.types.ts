@@ -8,21 +8,32 @@ export type GiftCardBuilderState = {
   buyerLastName: string;
   buyerPhone: string;
   buyerEmail: string;
-  // 2. personalization
+  // 2. recipient
   recipientName: string;
-  recipientPhone: string;
   recipientEmail: string;
+  recipientPhone: string;
+  // 3. personalization
   displayFrom: string;
-  usage: 'თბილისი' | 'საგარეჯო' | 'ორივე';
   message: string;
+  isAnonymous: boolean;
+  usage: 'თბილისი' | 'საგარეჯო' | 'ორივე';
   themeId: string;
+  // 4. delivery
+  deliveryMethod: 'ელექტრონული' | 'ბეჭდური';
+  deliveryTiming: 'immediate' | 'scheduled';
+  deliveryDate: string;
+  address: string;
 };
 
 export type GiftCardPatch = Partial<GiftCardBuilderState>;
 
-export type BuyerFieldErrors = {
+export type GiftCardFieldErrors = {
   firstName?: string;
   lastName?: string;
   phone?: string;
   email?: string;
+  recipientName?: string;
+  recipientEmail?: string;
+  address?: string;
+  deliveryDate?: string;
 };

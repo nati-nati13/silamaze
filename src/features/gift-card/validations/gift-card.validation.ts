@@ -24,12 +24,16 @@ export const PublicGiftCardSchema = z
     delivery: z.enum(['ელექტრონული', 'ბეჭდური']),
     address: z.string().optional(),
     message: z.string().optional(),
+    isAnonymous: z.boolean().optional(),
+    // ISO date (yyyy-mm-dd); empty = send as soon as the card is activated
+    deliveryDate: z.string().optional(),
   })
   .superRefine((val, ctx) => {
     const first = (val.buyerFirstName ?? '').trim();
     const last = (val.buyerLastName ?? '').trim();
     const buyerPhone = (val.buyerPhone ?? '').trim();
     const structured = Boolean(first || last || buyerPhone);
+    const isDigital = val.delivery === 'ელექტრონული';
 
     if (structured) {
       if (first.length < 2) {
@@ -41,6 +45,18 @@ export const PublicGiftCardSchema = z
       if (buyerPhone.length < 5) {
         ctx.addIssue({ code: 'custom', path: ['buyerPhone'], message: 'შეიყვანეთ ტელეფონი' });
       }
+      // buyer email is always required for the order confirmation
+      if ((val.buyerEmail ?? '').trim() === '') {
+        ctx.addIssue({ code: 'custom', path: ['buyerEmail'], message: 'ელ-ფოსტა სავალდებულოა' });
+      }
+      // digital cards are delivered to the recipient's email
+      if (isDigital && (val.recipientEmail ?? '').trim() === '') {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['recipientEmail'],
+          message: 'მიმღების ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის',
+        });
+      }
     } else {
       if ((val.name ?? '').trim().length < 2) {
         ctx.addIssue({ code: 'custom', path: ['name'], message: 'სახელი სავალდებულოა' });
@@ -48,21 +64,38 @@ export const PublicGiftCardSchema = z
       if ((val.phone ?? '').trim().length < 5) {
         ctx.addIssue({ code: 'custom', path: ['phone'], message: 'ტელეფონი სავალდებულოა' });
       }
-    }
-
-    // digital cards are delivered by email → required; physical pickup optional
-    const email = (val.buyerEmail || val.email || '').trim();
-    if (val.delivery === 'ელექტრონული' && email === '') {
-      ctx.addIssue({
-        code: 'custom',
-        path: [structured ? 'buyerEmail' : 'email'],
-        message: 'ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის',
-      });
+      // legacy single-email flow: required for digital, reused as recipient email
+      if (isDigital && (val.email ?? '').trim() === '') {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['email'],
+          message: 'ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის',
+        });
+      }
     }
 
     if (val.delivery === 'ბეჭდური' && (!val.address || val.address.trim().length < 5)) {
       ctx.addIssue({ code: 'custom', path: ['address'], message: 'მიუთითეთ მიწოდების მისამართი' });
     }
+
+    if (val.deliveryDate && val.deliveryDate.trim() !== '') {
+      const chosen = new Date(val.deliveryDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (Number.isNaN(chosen.getTime()) || chosen < today) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['deliveryDate'],
+          message: 'თარიღი არ შეიძლება იყოს წარსულში',
+        });
+      }
+    }
   });
 
 export type PublicGiftCardType = z.infer<typeof PublicGiftCardSchema>;
+
+export const ActivateGiftCardSchema = z.object({
+  code: z.string().min(1),
+});
+
+export type ActivateGiftCardType = z.infer<typeof ActivateGiftCardSchema>;

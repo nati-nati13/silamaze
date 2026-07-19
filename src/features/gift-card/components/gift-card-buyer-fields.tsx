@@ -1,10 +1,14 @@
-import { BuyerFieldErrors, GiftCardBuilderState, GiftCardPatch } from '@/features/gift-card/types/gift-card.types';
+import {
+  GiftCardBuilderState,
+  GiftCardFieldErrors,
+  GiftCardPatch,
+} from '@/features/gift-card/types/gift-card.types';
 import { Input } from '@/shared/components/ui/input';
 
 type Props = {
   state: GiftCardBuilderState;
   onChange: (patch: GiftCardPatch) => void;
-  errors: BuyerFieldErrors;
+  errors: GiftCardFieldErrors;
 };
 
 export const GiftCardBuyerFields = ({ state, onChange, errors }: Props) => {
@@ -55,9 +59,7 @@ export const GiftCardBuyerFields = ({ state, onChange, errors }: Props) => {
         </div>
 
         <div>
-          <label className="text-sm font-medium text-foreground">
-            შემძენის ელ-ფოსტა (ციფრული ბარათის მისაღებად) *
-          </label>
+          <label className="text-sm font-medium text-foreground">შემძენის ელ-ფოსტა *</label>
           <Input
             className="mt-1.5"
             type="email"
@@ -65,6 +67,7 @@ export const GiftCardBuyerFields = ({ state, onChange, errors }: Props) => {
             value={state.buyerEmail}
             onChange={(e) => onChange({ buyerEmail: e.target.value })}
           />
+          <p className="mt-1 text-xs text-muted-foreground">აქ მიიღებთ შეკვეთის დასტურს.</p>
           {errors.email && (
             <p className="mt-1.5 text-sm font-medium text-destructive">{errors.email}</p>
           )}

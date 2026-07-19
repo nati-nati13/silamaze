@@ -74,6 +74,12 @@ export const GIFT_CARD_STATUSES = [
 
 export type GiftCardStatus = (typeof GIFT_CARD_STATUSES)[number];
 
+export const RECIPIENT_DELIVERY_STATUSES = ['pending', 'scheduled', 'sent', 'failed'] as const;
+
+export type RecipientDeliveryStatus = (typeof RECIPIENT_DELIVERY_STATUSES)[number];
+
+export const GIFT_CARD_VALIDITY_MONTHS = 12;
+
 // prepared for future status-transition workflow (not enforced yet)
 export const GIFT_CARD_STATUS_TRANSITIONS: Record<GiftCardStatus, GiftCardStatus[]> = {
   pending: ['awaiting_payment', 'cancelled'],

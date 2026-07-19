@@ -1,6 +1,6 @@
 import mongoose, { InferSchemaType, Schema } from 'mongoose';
 
-import { GIFT_CARD_STATUSES } from '@/shared/const/gift-card.const';
+import { GIFT_CARD_STATUSES, RECIPIENT_DELIVERY_STATUSES } from '@/shared/const/gift-card.const';
 
 const GiftCardOrderSchema = new Schema(
   {
@@ -49,9 +49,26 @@ const GiftCardOrderSchema = new Schema(
     // set only when the card becomes active (payment not implemented yet)
     issuedAt: { type: Date, default: null },
     expiresAt: { type: Date, default: null },
+    // hide buyer identity from the recipient (buyer stays visible to admins)
+    isAnonymous: { type: Boolean, default: false },
+    // optional desired recipient send date; delivery only happens once active
+    deliveryDate: { type: Date, default: null },
+    deliveredAt: { type: Date, default: null },
+    recipientDeliveryStatus: {
+      type: String,
+      enum: [...RECIPIENT_DELIVERY_STATUSES],
+      default: 'pending',
+      required: true,
+    },
+    deliveryFailureReason: { type: String, default: '' },
+    // only the SHA-256 hash of the public verification token is stored
+    verificationTokenHash: { type: String, default: null },
+    qrGeneratedAt: { type: Date, default: null },
   },
   { timestamps: true }
 );
+
+GiftCardOrderSchema.index({ verificationTokenHash: 1 }, { sparse: true });
 
 GiftCardOrderSchema.index({ code: 1 }, { unique: true, sparse: true });
 
