@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
+import { Switch } from '@/shared/components/ui/switch';
 
 const USAGE_OPTIONS = [
   { value: 'თბილისი', label: 'თბილისი' },
@@ -34,6 +35,7 @@ type Props = {
 
 export const ReservationGiftCardFields = ({ control }: Props) => {
   const delivery = useWatch({ control, name: 'delivery' });
+  const giftToFriend = useWatch({ control, name: 'giftToFriend' });
 
   return (
     <>
@@ -104,6 +106,54 @@ export const ReservationGiftCardFields = ({ control }: Props) => {
                   value={field.value ?? ''}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
+
+      {delivery === 'ელექტრონული' && (
+        <FormField
+          control={control}
+          name="giftToFriend"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center justify-between rounded-xl border border-border px-4 py-3">
+                <div>
+                  <FormLabel className="text-sm font-medium text-foreground">
+                    ვჩუქნი მეგობარს
+                  </FormLabel>
+                  <p className="text-xs text-muted-foreground">
+                    ჩართეთ, თუ გსურთ ბარათი პირდაპირ მიმღების ელ-ფოსტაზე გაიგზავნოს.
+                  </p>
+                </div>
+                <FormControl>
+                  <Switch checked={field.value === true} onCheckedChange={field.onChange} />
+                </FormControl>
+              </div>
+            </FormItem>
+          )}
+        />
+      )}
+
+      {delivery === 'ელექტრონული' && giftToFriend && (
+        <FormField
+          control={control}
+          name="recipientEmail"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>მიმღების ელ-ფოსტა *</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="მაგ: friend@gmail.com"
+                  {...field}
+                  value={field.value ?? ''}
+                />
+              </FormControl>
+              <p className="text-xs text-muted-foreground">
+                ბარათი გაეგზავნება მიმღებს, გადახდის დასტური კი — თქვენს ელ-ფოსტაზე.
+              </p>
               <FormMessage />
             </FormItem>
           )}

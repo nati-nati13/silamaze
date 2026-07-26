@@ -43,6 +43,8 @@ export const ReservationForm = () => {
       date: '',
       time: '',
       message: '',
+      giftToFriend: false,
+      recipientEmail: '',
     },
   });
 
@@ -75,6 +77,7 @@ export const ReservationForm = () => {
           name: values.name,
           phone: values.phone,
           email: values.email,
+          recipientEmail: values.giftToFriend ? values.recipientEmail : '',
           message: values.message,
         });
         setGiftCardCode(res?.giftCardCode ?? null);
@@ -120,6 +123,8 @@ export const ReservationForm = () => {
         usage: undefined,
         delivery: undefined,
         address: '',
+        giftToFriend: false,
+        recipientEmail: '',
       });
     } catch {
       setError('შეცდომა. სცადეთ კვლავ.');

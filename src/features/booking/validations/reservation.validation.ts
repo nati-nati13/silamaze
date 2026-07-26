@@ -10,6 +10,8 @@ export const ReservationSchema = z
     name: z.string().min(2, 'სახელი სავალდებულოა'),
     phone: z.string().min(5, 'ტელეფონი სავალდებულოა'),
     email: z.string().email('არასწორი ელ-ფოსტა').optional().or(z.literal('')),
+    giftToFriend: z.boolean().optional(),
+    recipientEmail: z.string().email('არასწორი ელ-ფოსტა').optional().or(z.literal('')),
     selection: z.string().min(1, 'გთხოვთ აირჩიოთ'),
     customAmount: z.string().optional(),
     date: z.string().optional(),
@@ -35,6 +37,17 @@ export const ReservationSchema = z
       }
       if (val.delivery === 'ელექტრონული' && (!val.email || val.email.trim() === '')) {
         ctx.addIssue({ code: 'custom', path: ['email'], message: 'ელ-ფოსტა სავალდებულოა ციფრული ბარათისთვის' });
+      }
+      if (
+        val.delivery === 'ელექტრონული' &&
+        val.giftToFriend &&
+        (!val.recipientEmail || val.recipientEmail.trim() === '')
+      ) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['recipientEmail'],
+          message: 'მიუთითეთ მიმღების ელ-ფოსტა',
+        });
       }
       return;
     }

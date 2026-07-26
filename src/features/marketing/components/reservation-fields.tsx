@@ -139,7 +139,9 @@ export const ReservationFields = ({ control, type }: Props) => {
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>ელ-ფოსტა (შეტყობინებების მისაღებად)</FormLabel>
+            <FormLabel>
+              {isGiftCard ? 'თქვენი ელ-ფოსტა (გადახდის დასტურისთვის)' : 'ელ-ფოსტა (შეტყობინებების მისაღებად)'}
+            </FormLabel>
             <FormControl>
               <Input type="email" placeholder="მაგ: example@gmail.com" {...field} />
             </FormControl>
