@@ -5,7 +5,7 @@ import * as React from 'react'
 import { cn } from '@/shared/lib/utils'
 
 const buttonBaseClassName = cn(
-  'inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium',
+  'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm font-medium',
   'whitespace-nowrap transition-all outline-none disabled:pointer-events-none disabled:opacity-50',
   'focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50',
   'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40'
@@ -20,20 +20,21 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40',
         outline:
-          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
+          'border border-primary bg-transparent text-primary shadow-xs hover:bg-primary hover:text-primary-foreground dark:border-input dark:hover:bg-input/30',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        gold: 'bg-accent text-accent-foreground hover:bg-brand-academy/25',
         ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'rounded-md hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        link: 'rounded-none text-primary underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-4 py-2',
-        xs: 'h-6 gap-1 rounded-md px-2 text-xs',
-        sm: 'h-8 gap-1.5 rounded-md px-3',
-        lg: 'h-10 rounded-md px-6',
+        xs: 'h-6 gap-1 px-2 text-xs',
+        sm: 'h-8 gap-1.5 px-3',
+        lg: 'h-11 px-7',
         icon: 'size-9',
-        'icon-xs': 'size-6 rounded-md',
+        'icon-xs': 'size-6',
         'icon-sm': 'size-8',
         'icon-lg': 'size-10',
       },

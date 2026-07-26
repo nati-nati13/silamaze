@@ -1,4 +1,4 @@
-export const APP_NAME = 'Dermako Academy';
+export const APP_NAME = 'Dermako Beauty & Academy';
 
 export const APP_DESCRIPTION =
-  'სილამაზე, კოსმეტოლოგია და პროფესიული განათლება — Dermako Academy-ში. თბილისი და საგარეჯო.';
+  'სილამაზე, კოსმეტოლოგია და პროფესიული განათლება — Dermako Beauty & Academy-ში. თბილისი და საგარეჯო.';

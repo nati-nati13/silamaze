@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-fraunces);
+  --font-heading: var(--font-playfair);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -54,44 +54,44 @@
 }
 
 :root {
-  /* DERMAKO light: cream #F7F3EA ground, white cards, dark-green text #1E2521 */
-  --background: oklch(0.965 0.013 86.8);
-  --foreground: oklch(0.256 0.013 160.4);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.256 0.013 160.4);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.256 0.013 160.4);
-  /* deep green #18312B — header/footer/CTA surfaces + primary actions */
-  --primary: oklch(0.291 0.033 176.6);
-  --primary-foreground: oklch(0.965 0.013 86.8);
-  /* pale sage tints for secondary/accent surfaces */
-  --secondary: oklch(0.912 0.018 135);
-  --secondary-foreground: oklch(0.256 0.013 160.4);
-  --muted: oklch(0.935 0.012 90);
-  --muted-foreground: oklch(0.47 0.02 155);
-  --accent: oklch(0.912 0.018 135);
-  --accent-foreground: oklch(0.256 0.013 160.4);
+  /* DERMAKO BEAUTY & ACADEMY light: warm cream #F7F2E9 ground, paper cards #FBF8F2, ink text #20241F */
+  --background: oklch(0.963 0.013 82.4);
+  --foreground: oklch(0.254 0.011 139.4);
+  --card: oklch(0.98 0.009 84.6);
+  --card-foreground: oklch(0.254 0.011 139.4);
+  --popover: oklch(0.98 0.009 84.6);
+  --popover-foreground: oklch(0.254 0.011 139.4);
+  /* deep forest green #132A20 — header/footer/CTA surfaces + primary actions */
+  --primary: oklch(0.262 0.035 164.0);
+  --primary-foreground: oklch(0.963 0.013 82.4);
+  /* secondary green #1C3B2C for secondary dark surfaces */
+  --secondary: oklch(0.323 0.046 161.2);
+  --secondary-foreground: oklch(0.963 0.013 82.4);
+  --muted: oklch(0.94 0.014 84);
+  --muted-foreground: oklch(0.546 0.016 120.5);
+  --accent: oklch(0.899 0.023 87.2);
+  --accent-foreground: oklch(0.254 0.011 139.4);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.87 0.02 135);
-  --input: oklch(0.87 0.02 135);
-  --ring: oklch(0.291 0.033 176.6);
-  --radius: 0.5rem;
-  --chart-1: oklch(0.291 0.033 176.6);
-  --chart-2: oklch(0.662 0.103 74.4);
-  --chart-3: oklch(0.617 0.056 147.3);
-  --chart-4: oklch(0.764 0.034 138.2);
-  --chart-5: oklch(0.47 0.02 155);
-  --sidebar: oklch(0.965 0.013 86.8);
-  --sidebar-foreground: oklch(0.256 0.013 160.4);
-  --sidebar-primary: oklch(0.291 0.033 176.6);
-  --sidebar-primary-foreground: oklch(0.965 0.013 86.8);
-  --sidebar-accent: oklch(0.912 0.018 135);
-  --sidebar-accent-foreground: oklch(0.256 0.013 160.4);
-  --sidebar-border: oklch(0.87 0.02 135);
-  --sidebar-ring: oklch(0.291 0.033 176.6);
-  /* bronze/gold #B88945 accent (eyebrows/labels) + olive green #6F8F72 accent */
-  --brand-academy: oklch(0.662 0.103 74.4);
-  --brand-green: oklch(0.617 0.056 147.3);
+  --border: oklch(0.899 0.023 87.2);
+  --input: oklch(0.899 0.023 87.2);
+  --ring: oklch(0.262 0.035 164.0);
+  --radius: 0.75rem;
+  --chart-1: oklch(0.262 0.035 164.0);
+  --chart-2: oklch(0.710 0.108 74.5);
+  --chart-3: oklch(0.323 0.046 161.2);
+  --chart-4: oklch(0.847 0.077 80.7);
+  --chart-5: oklch(0.546 0.016 120.5);
+  --sidebar: oklch(0.963 0.013 82.4);
+  --sidebar-foreground: oklch(0.254 0.011 139.4);
+  --sidebar-primary: oklch(0.262 0.035 164.0);
+  --sidebar-primary-foreground: oklch(0.963 0.013 82.4);
+  --sidebar-accent: oklch(0.899 0.023 87.2);
+  --sidebar-accent-foreground: oklch(0.254 0.011 139.4);
+  --sidebar-border: oklch(0.899 0.023 87.2);
+  --sidebar-ring: oklch(0.262 0.035 164.0);
+  /* gold/tan #C9974F accent (eyebrows/labels/icon accents) + light gold #E7C893 */
+  --brand-academy: oklch(0.710 0.108 74.5);
+  --brand-green: oklch(0.323 0.046 161.2);
 }
 
 .dark {
@@ -152,7 +152,7 @@
 @layer utilities {
   /* eyebrow / label: wide tracking, small caps-style spacing */
   .eyebrow {
-    font-family: var(--font-inter);
+    font-family: var(--font-poppins);
     text-transform: uppercase;
     letter-spacing: 0.22em;
     font-size: 0.75rem;

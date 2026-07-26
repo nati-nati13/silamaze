@@ -28,6 +28,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/dajavshna/:path*',
+    '/design-system/:path*',
     '/sign-in',
     '/sign-up',
     '/login',

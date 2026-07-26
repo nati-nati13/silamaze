@@ -3,10 +3,10 @@ import { EMAIL, PHONE_NUMBER } from '@/shared/const/contacts.const';
 // Inline styles are required for email HTML (clients strip <style>/classes),
 // so these builders intentionally use style attributes.
 
-const GREEN = '#18312B';
-const CREAM = '#F7F3EA';
-const BRONZE = '#B88945';
-const TEXT = '#1E2521';
+const GREEN = '#132A20';
+const CREAM = '#F7F2E9';
+const BRONZE = '#C9974F';
+const TEXT = '#20241F';
 
 const shell = (inner: string): string =>
   `<div style="background:${CREAM};padding:24px;font-family:Arial,Helvetica,sans-serif;color:${TEXT}">

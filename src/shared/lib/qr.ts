@@ -11,7 +11,7 @@ class QrCodeGenerator {
       errorCorrectionLevel: 'M',
       margin: 1,
       width: 240,
-      color: { dark: '#18312B', light: '#F7F3EA' },
+      color: { dark: '#132A20', light: '#F7F2E9' },
     });
   }
 }

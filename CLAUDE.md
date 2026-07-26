@@ -304,19 +304,23 @@ Ask these exact axes; each meaningfully changes the design:
 
 ```
 STATUS: locked
-Product:    Consumer / editorial — DERMAKO ACADEMY, cosmetology academy + beauty clinic (Tbilisi & Sagarejo)
-Palette:    Green + bronze quiet luxury — LIGHT default (NOT a dark site).
-            Deep Green #18312B · Olive Green #6F8F72 · Soft Sage #A8B8A3 · Cream #F7F3EA · Bronze/Gold #B88945 · Dark Text #1E2521
-            Body sections stay LIGHT: Cream (#F7F3EA, --background) + White (#FFFFFF, --card), dark-green text (#1E2521, --foreground).
-            Deep Green (#18312B, --primary) is reserved for HEADER, FOOTER, and occasional CTA bands + primary action buttons — never a full-page dark wash.
-            Bronze/Gold (#B88945, --brand-academy) = eyebrows/labels/accents. Olive (#6F8F72, --brand-green) = hero accent word, icon chips, hover borders.
-            tokens (active light :root in src/app/globals.css): --background oklch(0.965 0.013 86.8); --foreground oklch(0.256 0.013 160.4);
-            --card oklch(1 0 0); --primary oklch(0.291 0.033 176.6); --primary-foreground = cream; --brand-academy oklch(0.662 0.103 74.4); --brand-green oklch(0.617 0.056 147.3).
+Product:    Consumer / editorial — DERMAKO BEAUTY & ACADEMY, premium cosmetology academy + beauty clinic (Tbilisi & Sagarejo)
+Palette:    Deep forest green + gold, quiet-luxury clinic — LIGHT default (NOT a dark site).
+            Deep Forest Green #132A20 · Secondary Green #1C3B2C · Warm Cream #F7F2E9 · Paper/Card #FBF8F2 ·
+            Gold/Tan #C9974F · Light Gold #E7C893 · Ink Text #20241F · Muted Gray-Green #6F7268 · Hairline Border #E4DDCD
+            Body sections stay LIGHT: Warm Cream (#F7F2E9, --background) + Paper (#FBF8F2, --card), ink text (#20241F, --foreground).
+            Deep Forest Green (#132A20, --primary) is reserved for HEADER, FOOTER, solid buttons, and CTA bands — never a full-page dark wash.
+            Gold/Tan (#C9974F, --brand-academy) = eyebrow labels, icon accents, hover borders. Secondary Green (#1C3B2C, --brand-green) = secondary dark surfaces.
+            tokens (active light :root in src/app/globals.css): --background oklch(0.963 0.013 82.4); --foreground oklch(0.254 0.011 139.4);
+            --card oklch(0.980 0.009 84.6); --primary oklch(0.262 0.035 164.0); --primary-foreground = cream;
+            --brand-academy oklch(0.710 0.108 74.5); --brand-green oklch(0.323 0.046 161.2); --border oklch(0.899 0.023 87.2).
             Theme is light-only: ThemeProvider defaultTheme="light", enableSystem=false; the .dark block in globals.css is currently unused — do NOT wrap pages in `dark`.
-Type:       Editorial serif display + sans body — Fraunces (headings, --font-fraunces) + Inter (body, --font-inter) + Geist Mono (data, --font-geist-mono)
-Feel:       Minimal & calm — quiet luxury / clean editorial minimalism (ref: Aesop, Vogue Beauty). Premium beauty academy, NOT heavy dark UI.
+Type:       Editorial serif display + sans body — Playfair Display (headings, --font-playfair) + Poppins (body/UI, --font-poppins) + Geist Mono (data, --font-geist-mono)
+Feel:       Minimal & calm — quiet luxury / high-end skincare clinic (NOT flashy). Large radii (14–22px) on cards, fully pill buttons.
+            Generous whitespace, ~80–90px vertical section padding. Soft shadows only, thin 1px hairline borders (no hard borders).
             CSS load-rise stagger + subtle hover lift; reduced-motion respected. Normal scroll (NO snap-slides / dot-nav).
-Signature:  Left-aligned editorial hero with one italic accent word (text-brand-green) + hand-drawn SVG underline;
-            bronze uppercase eyebrow labels; centered section heads; card grids with hover lift and growing top-rule;
-            embedded location maps; green CTA band; 4-column footer.
+Signature:  Sticky header — serif wordmark + small gold tagline under logo, centered nav, outline "Gift Card" + solid dark "Book Now" pill buttons right.
+            Gold uppercase eyebrow labels with short horizontal rule before text (e.g. "— OUR SERVICES"). Icon badge = small circle,
+            dark green bg, white icon, floats on card corners / feature blocks. Cards: image placeholder top, rounded-2xl, hairline border, hover lift.
+            Dark green CTA bands. Footer: dark green bg, 4-column (brand+social, nav links, contact, newsletter/social), bottom bar copyright + legal links.
 ```

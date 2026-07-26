@@ -1,3 +1,3 @@
 export const AUTH_ROUTES = ['/sign-in', '/sign-up', '/login', '/register'];
 
-export const PROTECTED_ROUTES = ['/dashboard', '/dajavshna'];
+export const PROTECTED_ROUTES = ['/dashboard', '/dajavshna', '/design-system'];

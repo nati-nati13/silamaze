@@ -16,20 +16,20 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Image src="/logo.svg" alt="Dermako Academy" width={44} height={44} className="size-11" />
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-6 sm:px-10">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <Image src="/logo.svg" alt="Dermako Beauty & Academy" width={44} height={44} className="size-11" />
           <span className="flex flex-col leading-none gap-1">
             <span className="font-heading text-2xl font-bold tracking-widest text-foreground">
               DERMAKO
             </span>
             <span className="text-xs font-semibold tracking-widest uppercase text-brand-academy">
-              ACADEMY
+              Beauty &amp; Academy
             </span>
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="ნავიგაცია">
+        <nav className="hidden flex-1 items-center justify-center gap-6 xl:flex" aria-label="ნავიგაცია">
           {PUBLIC_NAV_ITEMS.map((item) => {
             if (item.type === 'dropdown') {
               return (
@@ -59,7 +59,7 @@ export const Header = () => {
 
                   {openDropdown === item.label && (
                     <div className="absolute left-0 top-full pt-2 z-50">
-                      <div className="min-w-40 rounded-md border border-border bg-background shadow-md py-1">
+                      <div className="min-w-40 rounded-xl border border-border bg-background shadow-md py-1">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -96,10 +96,19 @@ export const Header = () => {
           })}
         </nav>
 
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/sachuqari-barati">სასაჩუქრე ბარათი</Link>
+          </Button>
+          <Button variant="default" size="sm" asChild>
+            <Link href="/dajavshna">დაჯავშნა</Link>
+          </Button>
+        </div>
+
         <Button
           variant="ghost"
           size="sm"
-          className="md:hidden"
+          className="xl:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="მენიუ"
         >
@@ -109,7 +118,7 @@ export const Header = () => {
 
       {mobileOpen && (
         <nav
-          className="md:hidden border-t border-border bg-background px-6 py-4"
+          className="xl:hidden border-t border-border bg-background px-6 py-4"
           aria-label="მობილური ნავიგაცია"
         >
           <ul className="flex flex-col gap-4">
