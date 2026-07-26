@@ -9,7 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    exclude: ['**/node_modules/**', '**/dist/**', 'meal-planner/**'],
+    exclude: ['**/node_modules/**', '**/dist/**'],
   },
   resolve: {
     alias: { '@': path.resolve(__dirname, './src') },
