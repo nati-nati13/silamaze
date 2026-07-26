@@ -1,14 +1,14 @@
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 
-import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
 
 export const ProductsPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <LandingHeader />
-      <main className="flex-1 pt-20">
+      <Header />
+      <main className="flex-1">
         <section className="bg-background py-32 sm:py-40">
           <div className="mx-auto w-full max-w-2xl px-6 text-center sm:px-10">
             <span

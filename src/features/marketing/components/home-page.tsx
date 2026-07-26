@@ -7,18 +7,18 @@ import { CtaBand } from '@/features/marketing/components/cta-band';
 import { FaqSection } from '@/features/marketing/components/faq-section';
 import { GalleryPreviewSection } from '@/features/marketing/components/gallery-preview-section';
 import { HeroSection } from '@/features/marketing/components/hero-section';
-import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { OfferingsSection } from '@/features/marketing/components/offerings-section';
 import { PhilosophySection } from '@/features/marketing/components/philosophy-section';
 import { ReservationSection } from '@/features/marketing/components/reservation-section';
 import { ServicesSection } from '@/features/marketing/components/services-section';
 import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
 import { Reveal } from '@/shared/components/ui/reveal';
 
 export const HomePage = () => {
   return (
     <div className="bg-background">
-      <LandingHeader />
+      <Header />
       <main>
         <HeroSection />
         <Reveal>

@@ -27,6 +27,18 @@ export const PUBLIC_NAV_ITEMS: PublicNavItem[] = [
   { type: 'link', href: '/akademia', label: 'აკადემია' },
   { type: 'link', href: '/servesebi', label: 'სერვისები' },
   { type: 'link', href: '/produqcia', label: 'პროდუქცია' },
+  { type: 'link', href: '/galeria', label: 'გალერეა' },
+  { type: 'link', href: '/siaxleebi', label: 'სიახლეები' },
+  { type: 'link', href: '/kontakti', label: 'კონტაქტი' },
+];
+
+// footer nav includes 2 items intentionally left out of the trimmed top-nav
+// (Gift Card has its own header CTA; Press stays reachable from the footer)
+export const FOOTER_NAV_ITEMS: PublicNavItem[] = [
+  { type: 'link', href: '/', label: 'მთავარი' },
+  { type: 'link', href: '/akademia', label: 'აკადემია' },
+  { type: 'link', href: '/servesebi', label: 'სერვისები' },
+  { type: 'link', href: '/produqcia', label: 'პროდუქცია' },
   { type: 'link', href: '/sachuqari-barati', label: 'სასაჩუქრე' },
   { type: 'link', href: '/galeria', label: 'გალერეა' },
   { type: 'link', href: '/siaxleebi', label: 'სიახლეები' },

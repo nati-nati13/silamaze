@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { Gift, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,7 +11,6 @@ import { PUBLIC_NAV_ITEMS } from '@/shared/const/navigation.const';
 
 export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   return (
@@ -31,54 +30,7 @@ export const Header = () => {
 
         <nav className="hidden flex-1 items-center justify-center gap-6 xl:flex" aria-label="ნავიგაცია">
           {PUBLIC_NAV_ITEMS.map((item) => {
-            if (item.type === 'dropdown') {
-              return (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => setOpenDropdown(item.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <button
-                    className={`flex items-center gap-1 text-xs font-semibold tracking-widest uppercase transition-colors duration-200 ${
-                      item.children.some((c) => c.href === pathname)
-                        ? 'text-primary'
-                        : 'text-muted-foreground hover:text-primary'
-                    }`}
-                    aria-expanded={openDropdown === item.label}
-                    aria-haspopup="true"
-                  >
-                    {item.label}
-                    <ChevronDown
-                      className={`size-3 transition-transform duration-200 ${
-                        openDropdown === item.label ? 'rotate-180' : ''
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </button>
-
-                  {openDropdown === item.label && (
-                    <div className="absolute left-0 top-full pt-2 z-50">
-                      <div className="min-w-40 rounded-xl border border-border bg-background shadow-md py-1">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={`block px-4 py-2 text-xs font-semibold tracking-widest uppercase transition-colors duration-200 ${
-                              pathname === child.href
-                                ? 'text-primary bg-muted'
-                                : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            }
+            if (item.type !== 'link') return null;
 
             return (
               <Link
@@ -97,8 +49,16 @@ export const Header = () => {
         </nav>
 
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/sachuqari-barati">სასაჩუქრე ბარათი</Link>
+          <Button
+            variant="outline"
+            size="sm"
+            asChild
+            className="border-brand-academy text-brand-academy hover:bg-brand-academy hover:text-primary-foreground"
+          >
+            <Link href="/sachuqari-barati">
+              <Gift className="size-4" aria-hidden="true" />
+              სასაჩუქრე ბარათი
+            </Link>
           </Button>
           <Button variant="default" size="sm" asChild>
             <Link href="/dajavshna">დაჯავშნა</Link>
@@ -123,46 +83,7 @@ export const Header = () => {
         >
           <ul className="flex flex-col gap-4">
             {PUBLIC_NAV_ITEMS.map((item) => {
-              if (item.type === 'dropdown') {
-                return (
-                  <li key={item.label}>
-                    <button
-                      className="flex w-full items-center justify-between text-sm font-semibold tracking-widest uppercase text-muted-foreground"
-                      onClick={() =>
-                        setOpenDropdown(openDropdown === item.label ? null : item.label)
-                      }
-                      aria-expanded={openDropdown === item.label}
-                    >
-                      {item.label}
-                      <ChevronDown
-                        className={`size-4 transition-transform duration-200 ${
-                          openDropdown === item.label ? 'rotate-180' : ''
-                        }`}
-                        aria-hidden="true"
-                      />
-                    </button>
-                    {openDropdown === item.label && (
-                      <ul className="mt-2 flex flex-col gap-2 pl-4 border-l border-border">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              className={`block text-sm font-semibold tracking-widest uppercase transition-colors ${
-                                pathname === child.href
-                                  ? 'text-primary'
-                                  : 'text-muted-foreground hover:text-primary'
-                              }`}
-                              onClick={() => setMobileOpen(false)}
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                );
-              }
+              if (item.type !== 'link') return null;
 
               return (
                 <li key={item.href}>

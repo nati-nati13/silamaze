@@ -2,8 +2,8 @@ import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 import { CoursesCarousel } from '@/features/marketing/components/courses-carousel';
-import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
 import { Button } from '@/shared/components/ui/button';
 import { FACEBOOK_URL } from '@/shared/const/contacts.const';
 
@@ -18,8 +18,8 @@ const WHY_US = [
 export const AcademyPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <LandingHeader />
-      <main className="flex-1 pt-20">
+      <Header />
+      <main className="flex-1">
         <section className="bg-background py-20 sm:py-28">
           <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
             <CoursesCarousel

@@ -1,8 +1,8 @@
 import { Facebook, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 
-import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
 import { FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
 
 const FACEBOOK_LINK_CLASS =
@@ -12,8 +12,8 @@ const FACEBOOK_LINK_CLASS =
 export const ContactPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <LandingHeader />
-      <main className="flex-1 pt-20">
+      <Header />
+      <main className="flex-1">
         <section className="bg-muted py-20">
           <div className="mx-auto max-w-7xl px-6 sm:px-10 text-center">
             <p className="text-xs font-semibold tracking-widest uppercase text-brand-academy">

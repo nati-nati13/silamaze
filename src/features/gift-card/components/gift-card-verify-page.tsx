@@ -1,8 +1,8 @@
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 import type { SafeVerification } from '@/features/gift-card/service/gift-card.service';
-import { LandingHeader } from '@/features/marketing/components/landing-header';
 import { Footer } from '@/shared/components/layout/footer';
+import { Header } from '@/shared/components/layout/header';
 
 type StatusView = { tone: 'ok' | 'bad'; title: string; note: string };
 
@@ -42,8 +42,8 @@ export const GiftCardVerifyPage = ({ data }: { data: SafeVerification }) => {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <LandingHeader />
-      <main className="flex-1 pt-20">
+      <Header />
+      <main className="flex-1">
         <section className="py-16 sm:py-24">
           <div className="mx-auto max-w-lg px-6">
             <p className="eyebrow text-center text-brand-academy">Dermako Gift Card</p>

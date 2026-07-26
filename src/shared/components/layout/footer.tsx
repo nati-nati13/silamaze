@@ -6,7 +6,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { APP_NAME } from '@/shared/const/app.const';
 import { EMAIL, FACEBOOK_URL, LOCATIONS } from '@/shared/const/contacts.const';
-import { PUBLIC_NAV_ITEMS } from '@/shared/const/navigation.const';
+import { FOOTER_NAV_ITEMS } from '@/shared/const/navigation.const';
 
 const SOCIAL_LINK_CLASS =
   'inline-flex size-9 items-center justify-center rounded-full border border-primary-foreground/20 ' +
@@ -61,7 +61,7 @@ export const Footer = () => {
               ნავიგაცია
             </h4>
             <ul className="mt-4 flex flex-col gap-3">
-              {PUBLIC_NAV_ITEMS.map((item) =>
+              {FOOTER_NAV_ITEMS.map((item) =>
                 item.type === 'link' ? (
                   <li key={item.href}>
                     <Link

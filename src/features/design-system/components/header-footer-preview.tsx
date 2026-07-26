@@ -13,8 +13,7 @@ export const HeaderFooterPreview = () => {
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
           Nav collapses to a hamburger menu below the <span className="font-mono">xl</span> (1280px) breakpoint —
-          resize the browser to see it. Note: marketing pages currently render a separate{' '}
-          <span className="font-mono">LandingHeader</span> component (see audit report), not this one.
+          resize the browser to see it. This is now the single header used across every public and protected page.
         </p>
       </div>
 
