@@ -16,13 +16,13 @@ export const GiftCardGallery = () => {
           <div className="grid grid-cols-2 gap-4">
             {GIFT_CARD_GALLERY_ITEMS.map((item) => (
               <div key={item.id} className="flex flex-col gap-2">
-                <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-muted">
+                <div className="relative aspect-3/2 overflow-hidden rounded-2xl border border-border bg-muted">
                   <Image
                     src={item.image}
                     alt={item.label}
                     fill
                     sizes="(max-width: 1024px) 50vw, 25vw"
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 <p className="text-center text-xs font-semibold text-muted-foreground">{item.label}</p>

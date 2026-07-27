@@ -88,14 +88,14 @@ export const GiftCardHero = () => {
             </div>
           </div>
 
-          <div className="relative aspect-4/3 overflow-hidden rounded-5xl border border-border shadow-2xl">
+          <div className="relative aspect-3/2 overflow-hidden rounded-5xl border border-border bg-muted shadow-2xl">
             <Image
               src="/images/gift-card/envelope-closed.png"
               alt="Dermako-ს პრემიუმ სასაჩუქრე სერტიფიკატის კონვერტი"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 28rem"
-              className="object-cover"
+              className="object-contain"
             />
           </div>
         </div>
