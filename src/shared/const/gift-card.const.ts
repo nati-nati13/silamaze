@@ -99,6 +99,62 @@ export const GIFT_CARD_CONDITIONS: string[] = [
   'არ ანაზღაურდება ნაღდი ფულით',
 ];
 
+export type GiftCardBenefit = {
+  icon: 'gift' | 'sparkles' | 'leaf' | 'crown';
+  title: string;
+  description: string;
+};
+
+export const GIFT_CARD_BENEFITS: GiftCardBenefit[] = [
+  {
+    icon: 'gift',
+    title: 'უნიკალური საჩუქარი',
+    description: 'მისაწვდისობა ნებისმიერი განსაკუთრებული მოვლენისთვის',
+  },
+  {
+    icon: 'sparkles',
+    title: 'თავისუფალი არჩევანი',
+    description: 'მიმღები თავად ირჩევს სასურველ მომსახურებას',
+  },
+  {
+    icon: 'leaf',
+    title: 'სილამაზე და ზრუნვა',
+    description: 'აჩუქეთ არა ნივთი, არამედ საკუთარი თავის მოვლის გამოცდილება',
+  },
+  {
+    icon: 'crown',
+    title: 'პრემიუმ გაცილება',
+    description: 'სასაჩუქრე სერტიფიკატი მოქცემდება Dermako Beauty-ს მომსახურეობაზე',
+  },
+];
+
+export type GiftCardGalleryItem = {
+  id: string;
+  label: string;
+};
+
+export const GIFT_CARD_GALLERY_ITEMS: GiftCardGalleryItem[] = [
+  { id: 'gc-gallery-1', label: 'დახურული კონვერტი' },
+  { id: 'gc-gallery-2', label: 'გახსნილი კონვერტი' },
+  { id: 'gc-gallery-3', label: 'სერტიფიკატის დიზაინი' },
+  { id: 'gc-gallery-4', label: 'პრემიუმ შეფუთვა' },
+];
+
+export type GiftCardServicePreviewItem = {
+  icon: 'laser' | 'injection' | 'facial' | 'massage' | 'other';
+  label: string;
+};
+
+export const GIFT_CARD_SERVICE_PREVIEW_ITEMS: GiftCardServicePreviewItem[] = [
+  { icon: 'laser', label: 'ლაზერული ეპილაცია' },
+  { icon: 'injection', label: 'ინექციური კოსმეტოლოგია' },
+  { icon: 'facial', label: 'სახის წმენდა' },
+  { icon: 'massage', label: 'მასაჟი' },
+  { icon: 'other', label: 'სხვა მომსახურება' },
+];
+
+export const GIFT_CARD_PREVIEW_AMOUNTS: string[] = ['100 ₾', '200 ₾', '300 ₾', '500 ₾'];
+
 export const GIFT_CARD_USAGE_RULES: string[] = [
   'სერტიფიკატი მოქმედებს Dermako Beauty-ის ყველა მომსახურებაზე',
   'სერტიფიკატი არ იცვლება ნაღდი ფულადი ეკვივალენტზე',
