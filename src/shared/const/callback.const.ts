@@ -1,6 +1,7 @@
 export const CALLBACK_INTEREST_TYPES = [
   'მომსახურება',
   'აკადემიის კურსი',
+  'სასაჩუქრე ბარათი',
   'სხვა',
 ] as const;
 

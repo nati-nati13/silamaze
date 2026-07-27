@@ -21,7 +21,7 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { NativeSelect } from '@/shared/components/ui/select';
-import { CALLBACK_INTEREST_TYPES } from '@/shared/const/callback.const';
+import { CALLBACK_INTEREST_TYPES, type CallbackInterestType } from '@/shared/const/callback.const';
 import { LOCATIONS } from '@/shared/const/contacts.const';
 import { http } from '@/shared/lib/http';
 
@@ -42,14 +42,28 @@ const DirectPhone = () => (
   </p>
 );
 
-export const CallbackForm = () => {
-  const [open, setOpen] = useState(false);
+type CallbackFormProps = {
+  // pre-selects the interest-type dropdown (e.g. when embedded on a page
+  // that already has a specific topic, like the gift-card page)
+  defaultInterestType?: CallbackInterestType;
+  // controlled visibility: when provided, the parent owns open/close and
+  // this component renders only the form (no built-in "დაგვირეკეთ" trigger)
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export const CallbackForm = (
+  { defaultInterestType, open: controlledOpen, onOpenChange }: CallbackFormProps = {}
+) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (next: boolean) => (controlledOpen !== undefined ? onOpenChange?.(next) : setInternalOpen(next));
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<PublicCallbackType>({
     resolver: zodResolver(PublicCallbackSchema),
-    defaultValues: { name: '', phone: '', message: '', consent: false },
+    defaultValues: { name: '', phone: '', message: '', consent: false, interestType: defaultInterestType },
   });
 
   const onSubmit = async (values: PublicCallbackType) => {
@@ -74,6 +88,9 @@ export const CallbackForm = () => {
   }
 
   if (!open) {
+    // controlled mode: the parent renders its own trigger, nothing to show here
+    if (controlledOpen !== undefined) return null;
+
     return (
       <div className="relative mt-8 flex flex-col items-center">
         <Button
