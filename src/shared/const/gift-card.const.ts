@@ -131,13 +131,14 @@ export const GIFT_CARD_BENEFITS: GiftCardBenefit[] = [
 export type GiftCardGalleryItem = {
   id: string;
   label: string;
+  image: string;
 };
 
 export const GIFT_CARD_GALLERY_ITEMS: GiftCardGalleryItem[] = [
-  { id: 'gc-gallery-1', label: 'დახურული კონვერტი' },
-  { id: 'gc-gallery-2', label: 'გახსნილი კონვერტი' },
-  { id: 'gc-gallery-3', label: 'სერტიფიკატის დიზაინი' },
-  { id: 'gc-gallery-4', label: 'პრემიუმ შეფუთვა' },
+  { id: 'gc-gallery-1', label: 'დახურული კონვერტი', image: '/images/gift-card/envelope-closed.png' },
+  { id: 'gc-gallery-2', label: 'გახსნილი კონვერტი', image: '/images/gift-card/envelope-open.png' },
+  { id: 'gc-gallery-3', label: 'სერტიფიკატის დიზაინი', image: '/images/gift-card/certificate-design.png' },
+  { id: 'gc-gallery-4', label: 'პრემიუმ შეფუთვა', image: '/images/gift-card/premium-wrap.png' },
 ];
 
 export type GiftCardServicePreviewItem = {

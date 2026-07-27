@@ -1,6 +1,7 @@
 'use client';
 
-import { CalendarCheck, Gift, Package, Sparkles, type LucideIcon } from 'lucide-react';
+import { CalendarCheck, Flower2, Gift, type LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -17,7 +18,7 @@ type GiftCardHeroFeature = {
 
 const HERO_FEATURES: GiftCardHeroFeature[] = [
   {
-    icon: Package,
+    icon: Gift,
     title: 'პრემიუმ შეფუთვა',
     description: 'სერტიფიკატი გაცემულია მდიდრული, საჩუქრად მზა დიზაინით.',
   },
@@ -27,7 +28,7 @@ const HERO_FEATURES: GiftCardHeroFeature[] = [
     description: 'გაცემიდან სრული ერთი წლის განმავლობაში აქტიურია.',
   },
   {
-    icon: Sparkles,
+    icon: Flower2,
     title: 'მომსახურების თავისუფალი არჩევანი',
     description: 'მიმღები თავად ირჩევს ნებისმიერ პროცედურას ან კურსს.',
   },
@@ -87,18 +88,15 @@ export const GiftCardHero = () => {
             </div>
           </div>
 
-          <div
-            role="img"
-            aria-label="Dermako-ს პრემიუმ სასაჩუქრე სერტიფიკატი — რეალური ვიზუალი მალე დაემატება"
-            className="relative flex aspect-4/3 items-center justify-center overflow-hidden rounded-5xl
-              border border-brand-academy/30 bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl"
-          >
-            <IconBadge size="lg" className="bg-brand-academy text-primary">
-              <Gift aria-hidden="true" />
-            </IconBadge>
-            <span className="absolute bottom-6 text-xs font-semibold tracking-widest text-primary-foreground/70 uppercase">
-              პრემიუმ სასაჩუქრე სერტიფიკატი
-            </span>
+          <div className="relative aspect-4/3 overflow-hidden rounded-5xl border border-border shadow-2xl">
+            <Image
+              src="/images/gift-card/envelope-closed.png"
+              alt="Dermako-ს პრემიუმ სასაჩუქრე სერტიფიკატის კონვერტი"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 28rem"
+              className="object-cover"
+            />
           </div>
         </div>
 
