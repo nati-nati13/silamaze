@@ -123,7 +123,7 @@ export const GIFT_CARD_BENEFITS: GiftCardBenefit[] = [
   },
   {
     icon: 'crown',
-    title: 'პრემიუმ გაცილება',
+    title: 'პრემიუმ გამოცდილება',
     description: 'სასაჩუქრე სერტიფიკატი მოქცემდება Dermako Beauty-ს მომსახურეობაზე',
   },
 ];
