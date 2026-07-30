@@ -1,5 +1,14 @@
+export type ProductCategoryId =
+  | 'face-creams'
+  | 'serums'
+  | 'eye-care'
+  | 'cleansers'
+  | 'moisturizers'
+  | 'spf'
+  | 'professional';
+
 export type ProductCategory = {
-  id: string;
+  id: ProductCategoryId;
   label: string;
   icon: 'droplet' | 'pipette' | 'eye' | 'spray-can' | 'waves' | 'sun' | 'flask-conical';
 };
@@ -12,4 +21,9 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
   { id: 'moisturizers', label: 'დამატენიანებლები', icon: 'waves' },
   { id: 'spf', label: 'SPF', icon: 'sun' },
   { id: 'professional', label: 'პროფესიონალური კოსმეტიკა', icon: 'flask-conical' },
+];
+
+export const PRODUCT_CATEGORY_IDS = PRODUCT_CATEGORIES.map((c) => c.id) as [
+  ProductCategoryId,
+  ...ProductCategoryId[],
 ];
