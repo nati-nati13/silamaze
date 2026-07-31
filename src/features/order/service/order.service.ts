@@ -9,6 +9,7 @@ function toOrder(doc: {
   customerPhone: string;
   items?:
     | {
+        productId: { toString(): string };
         productName: string;
         quantity: number;
         unitPrice: number;
@@ -26,6 +27,7 @@ function toOrder(doc: {
     customerName: doc.customerName,
     customerPhone: doc.customerPhone,
     items: (doc.items ?? []).map((item) => ({
+      productId: item.productId.toString(),
       productName: item.productName,
       quantity: item.quantity,
       unitPrice: item.unitPrice,

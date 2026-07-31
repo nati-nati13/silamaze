@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import { CartDrawer } from '@/features/cart/components/cart-drawer';
 import { Button } from '@/shared/components/ui/button';
 import { PUBLIC_NAV_ITEMS } from '@/shared/const/navigation.const';
 
@@ -64,6 +65,8 @@ export const Header = () => {
             <Link href="/dajavshna">დაჯავშნა</Link>
           </Button>
         </div>
+
+        <CartDrawer />
 
         <Button
           variant="ghost"

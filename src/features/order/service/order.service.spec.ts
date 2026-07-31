@@ -28,6 +28,7 @@ const baseDoc = {
   customerPhone: '555000111',
   items: [
     {
+      productId: { toString: () => 'p1' },
       productName: 'Hydrating Cream',
       quantity: 2,
       unitPrice: 50,

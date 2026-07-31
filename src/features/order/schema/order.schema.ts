@@ -4,6 +4,7 @@ import { ORDER_PAYMENT_STATUSES, ORDER_STATUSES } from '@/shared/const/order.con
 
 const OrderItemSchema = new Schema(
   {
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
     productName: { type: String, required: true },
     quantity: { type: Number, required: true, min: 1 },
     unitPrice: { type: Number, required: true, min: 0 },

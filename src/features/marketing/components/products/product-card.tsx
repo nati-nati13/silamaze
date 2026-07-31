@@ -1,6 +1,11 @@
-import Image from 'next/image';
+'use client';
 
+import Image from 'next/image';
+import { useState } from 'react';
+
+import { useCartStore } from '@/features/cart/hooks/useCartStore';
 import type { Product } from '@/features/product/types/product.types';
+import { Button } from '@/shared/components/ui/button';
 import { PRODUCT_CATEGORIES } from '@/shared/const/product-categories.const';
 
 type Props = {
@@ -8,11 +13,25 @@ type Props = {
 };
 
 export const ProductCard = ({ product }: Props) => {
+  const { addItem } = useCartStore();
+  const [justAdded, setJustAdded] = useState(false);
   const categoryLabel = PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label ?? '';
   const hasDiscount = product.discountPrice !== null && product.discountPrice < product.price;
   const discountPercent = hasDiscount
     ? Math.round((1 - (product.discountPrice as number) / product.price) * 100)
     : 0;
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      discountPrice: product.discountPrice ?? undefined,
+      image: product.images[0],
+    });
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
+  };
 
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card">
@@ -45,6 +64,9 @@ export const ProductCard = ({ product }: Props) => {
             <span className="font-heading text-lg font-bold text-foreground">{product.price} ₾</span>
           )}
         </div>
+        <Button size="sm" onClick={handleAddToCart} disabled={justAdded}>
+          {justAdded ? 'დამატებულია' : 'დამატება კალათაში'}
+        </Button>
       </div>
     </div>
   );

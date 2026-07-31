@@ -1,6 +1,7 @@
 import { OrderPaymentStatus, OrderStatus } from '@/shared/const/order.const';
 
 export type OrderItem = {
+  productId: string;
   productName: string;
   quantity: number;
   unitPrice: number;
