@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { formatDate, truncate, capitalize } from './format';
+import { formatDate, truncate, capitalize, slugify } from './format';
 
 describe('formatDate', () => {
   it('formats a date object', () => {
@@ -39,5 +39,19 @@ describe('capitalize', () => {
 
   it('handles empty string', () => {
     expect(capitalize('')).toBe('');
+  });
+});
+
+describe('slugify', () => {
+  it('lowercases and dashes spaces', () => {
+    expect(slugify('Hydrating Face Cream')).toBe('hydrating-face-cream');
+  });
+
+  it('strips non-alphanumeric characters', () => {
+    expect(slugify('Café & Co. 50%!')).toBe('caf-co-50');
+  });
+
+  it('trims leading and trailing dashes', () => {
+    expect(slugify('  --Hello--  ')).toBe('hello');
   });
 });

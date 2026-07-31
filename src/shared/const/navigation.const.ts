@@ -1,11 +1,12 @@
 export type SidebarNavItem = {
   href: string;
   label: string;
-  icon: 'dashboard';
+  icon: 'dashboard' | 'products';
 };
 
 export const SIDEBAR_NAV_ITEMS: SidebarNavItem[] = [
   { href: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { href: '/dashboard/products', label: 'პროდუქტები', icon: 'products' },
 ];
 
 export type PublicNavLink = {

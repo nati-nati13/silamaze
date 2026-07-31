@@ -37,4 +37,39 @@ export const productRepository = {
     const doc = await ProductModel.create(data);
     return doc._id.toString();
   },
+
+  async findById(id: string): Promise<ProductDocument | null> {
+    await mongo.connect();
+    return ProductModel.findById(id).lean<ProductDocument | null>().exec();
+  },
+
+  async findBySlug(slug: string): Promise<ProductDocument | null> {
+    await mongo.connect();
+    return ProductModel.findOne({ slug }).lean<ProductDocument | null>().exec();
+  },
+
+  async updateById(
+    id: string,
+    patch: Partial<{
+      name: string;
+      slug: string;
+      description: string;
+      division: string;
+      category: string | null;
+      brand: string;
+      price: number;
+      discountPrice: number | null;
+      skinType: string[];
+      skinConcern: string[];
+      images: string[];
+      sku: string | null;
+      stock: number;
+      isActive: boolean;
+    }>
+  ): Promise<ProductDocument | null> {
+    await mongo.connect();
+    return ProductModel.findByIdAndUpdate(id, { $set: patch }, { new: true })
+      .lean<ProductDocument | null>()
+      .exec();
+  },
 };
